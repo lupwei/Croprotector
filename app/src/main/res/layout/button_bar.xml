@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="#fff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <RadioGroup
+            android:id="@+id/rg_radio"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_about"
+                style="@style/main_tab_bottom"
+                android:checked="true"
+                android:drawableTop="@drawable/icon_uav_seletor"
+                android:text="无人机" />
+
+            <RadioButton
+                android:id="@+id/rb_introduction"
+                style="@style/main_tab_bottom"
+                android:layout_marginLeft="20dp"
+                android:checked="false"
+                android:drawableTop="@drawable/icon_photograph_seletor"
+                android:text="拍照" />
+
+            <RadioButton
+                android:id="@+id/rb_location"
+                style="@style/main_tab_bottom"
+                android:layout_marginLeft="20dp"
+                android:checked="false"
+                android:drawableTop="@drawable/icon_epidemic_situation_seletor"
+                android:text="地图" />
+
+            <RadioButton
+                android:id="@+id/rb_service"
+                style="@style/main_tab_bottom"
+                android:layout_marginLeft="20dp"
+                android:checked="false"
+                android:drawableTop="@drawable/icon_history_seletor"
+                android:text="我的" />
+        </RadioGroup>
+
+    </RelativeLayout>
+
+</LinearLayout>
