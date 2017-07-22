@@ -16,9 +16,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
-    private RadioButton aboutRb,introductRb,locationRb,serviceRb;
+    /*
+    UAVRb-----"无人机"按钮；
+    ShootRb-----“拍照”按钮；
+    MapRb------“地图”按钮；
+    UserRb------“我的”按钮
+    */
+    private RadioButton UAVRb,ShootRb,MapRb,UserRb;
     private ImageView iv,iv1;
     private boolean firstIc = true;
 
@@ -35,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
 
         iv = (ImageView) findViewById(R.id.iv);
         iv1 = (ImageView) findViewById(R.id.iv_1);
-        aboutRb = (RadioButton) findViewById(R.id.rb_about);
-        introductRb = (RadioButton) findViewById(R.id.rb_introduction);
-        locationRb = (RadioButton) findViewById(R.id.rb_location);
-        serviceRb = (RadioButton) findViewById(R.id.rb_service);
+        UAVRb = (RadioButton) findViewById(R.id.rb_about);
+        ShootRb = (RadioButton) findViewById(R.id.rb_introduction);
+        MapRb = (RadioButton) findViewById(R.id.rb_location);
+        UserRb = (RadioButton) findViewById(R.id.rb_service);
 
         //Initialize DJI SDK Manager
         mHandler = new Handler(Looper.getMainLooper());
@@ -47,8 +55,9 @@ public class MainActivity extends AppCompatActivity {
         initListener();
     }
 
+    //设置监听事件；
     private void initListener() {
-        aboutRb.setOnClickListener(new View.OnClickListener() {
+        UAVRb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 iv.setImageResource(R.mipmap.ic_1);
@@ -56,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                 iv.setVisibility(View.VISIBLE);
             }
         });
-        introductRb.setOnClickListener(new View.OnClickListener() {
+        ShootRb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 iv.setImageResource(R.mipmap.ic_2);
@@ -64,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 iv.setVisibility(View.VISIBLE);
             }
         });
-        locationRb.setOnClickListener(new View.OnClickListener() {
+        MapRb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 iv.setImageResource(R.mipmap.ic_3);
@@ -72,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                 iv.setVisibility(View.VISIBLE);
             }
         });
-        serviceRb.setOnClickListener(new View.OnClickListener() {
+        UserRb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 iv.setImageResource(R.mipmap.ic_4);

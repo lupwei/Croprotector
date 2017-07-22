@@ -22,7 +22,7 @@
                 android:id="@+id/rb_about"
                 style="@style/main_tab_bottom"
                 android:checked="true"
-                android:drawableTop="@drawable/icon_uav_seletor"
+                android:drawableTop="@drawable/uav_selector"
                 android:text="无人机" />
 
             <RadioButton
@@ -30,7 +30,7 @@
                 style="@style/main_tab_bottom"
                 android:layout_marginLeft="20dp"
                 android:checked="false"
-                android:drawableTop="@drawable/icon_photograph_seletor"
+                android:drawableTop="@drawable/shoot_selector"
                 android:text="拍照" />
 
             <RadioButton
@@ -38,7 +38,7 @@
                 style="@style/main_tab_bottom"
                 android:layout_marginLeft="20dp"
                 android:checked="false"
-                android:drawableTop="@drawable/icon_epidemic_situation_seletor"
+                android:drawableTop="@drawable/map_selector"
                 android:text="地图" />
 
             <RadioButton
@@ -46,7 +46,7 @@
                 style="@style/main_tab_bottom"
                 android:layout_marginLeft="20dp"
                 android:checked="false"
-                android:drawableTop="@drawable/icon_history_seletor"
+                android:drawableTop="@drawable/user_selector"
                 android:text="我的" />
         </RadioGroup>
 
