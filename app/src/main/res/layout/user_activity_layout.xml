@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#efefef">
+
+    <Button
+        android:id="@+id/button_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="136dp"
+        android:background="#fefefe"
+        android:gravity="left"
+        android:text="修改密码"
+        android:textColor="#0a7b51"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/button_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fefefe"
+        android:gravity="left"
+        android:text="历史记录"
+        android:textColor="#0a7b51"
+        android:textSize="30sp"
+        android:layout_below="@+id/button_password"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="32dp" />
+
+    <Button
+        android:id="@+id/button_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fefefe"
+        android:text="注销"
+        android:textColor="#ed6840"
+        android:textSize="30sp"
+        android:layout_marginBottom="77dp"
+        android:layout_above="@+id/include3"
+        android:layout_alignParentStart="true" />
+
+    <include
+        layout="@layout/button_bar"
+        android:id="@+id/include3"/>
+
+
+
+</RelativeLayout>
+
