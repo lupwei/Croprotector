@@ -44,12 +44,12 @@
         "source": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\drawable\\draw_route.png"
     },
     {
-        "merged": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\radio_unchecked.png",
-        "source": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\drawable\\radio_unchecked.png"
-    },
-    {
         "merged": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\draw_arrow.png",
         "source": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\drawable\\draw_arrow.png"
+    },
+    {
+        "merged": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\radio_unchecked.png",
+        "source": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\drawable\\radio_unchecked.png"
     },
     {
         "merged": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable\\radio_checked.png",
