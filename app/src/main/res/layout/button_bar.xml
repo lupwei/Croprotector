@@ -11,12 +11,19 @@
         android:layout_height="wrap_content"
         android:gravity="center">
 
+        <View
+            android:id="@+id/button_bar_topline"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#0a7b51"/>
+
         <RadioGroup
             android:id="@+id/rg_radio"
             android:layout_width="match_parent"
             android:layout_height="57dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_alignParentTop="true">
 
             <RadioButton
                 android:id="@+id/rb_about"

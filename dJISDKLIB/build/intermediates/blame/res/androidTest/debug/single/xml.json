@@ -1,5 +1,9 @@
 [
     {
+        "merged": "C:\\Users\\ZTH\\work\\Croprotector\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\xml\\accessory_filter.xml",
+        "source": "C:\\Users\\ZTH\\work\\Croprotector\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\xml\\accessory_filter.xml"
+    },
+    {
         "merged": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\xml\\accessory_filter.xml",
         "source": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\xml\\accessory_filter.xml"
     }
