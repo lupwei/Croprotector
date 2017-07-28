@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/diseasename"
+        android:textSize="47sp"
+        android:textColor="#0a7b51"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5" />
+
+    <TextView
+        android:id="@+id/item_num"
+        android:textSize="47sp"
+        android:textColor="#0a7b51"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:src="@mipmap/arrow_icon"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_weight="1" />
+
+
+</LinearLayout>

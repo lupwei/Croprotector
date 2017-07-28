@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/infolist"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:background="@drawable/icon_infolist_selector"
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="15dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/maplist"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:background="@drawable/icon_maplist_selector"
+        android:layout_alignTop="@+id/infolist"
+        android:layout_toEndOf="@+id/infolist" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@drawable/divide_line"
+        android:layout_marginTop="60dp"
+        android:id="@+id/view" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/view"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/bottom_bar" />
+
+
+
+    <nova.croprotector.ButtonBar
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+
+
+</RelativeLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/disease_pic"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:src="@drawable/disease_pic1" />
+
+    <TextView
+        android:id="@+id/time"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_toEndOf="@+id/disease_pic" />
+
+    <TextView
+        android:id="@+id/location"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_alignBottom="@+id/disease_pic"
+        android:layout_toEndOf="@+id/disease_pic" />
+
+
+
+</RelativeLayout>
