@@ -61,7 +61,8 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    public static void actionStart(Context context){                                      //活动启动器
+    public static void actionStart(Context context){
+        //活动启动器
         Intent intent=new Intent(context,UserActivity.class);
         context.startActivity(intent);
     }

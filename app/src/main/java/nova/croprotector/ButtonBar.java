@@ -32,9 +32,11 @@ public class ButtonBar extends LinearLayout {
                         break;
                     case R.id.rb_introduction:
                         //跳转到拍照界面
+                        Shoot_activity.actionStart(context);
                         break;
                     case R.id.rb_location:
                         //跳转到地图界面
+                        Map_activity.actionStart(context);
                         break;
                     case R.id.rb_service:
                         UserActivity.actionStart(context);

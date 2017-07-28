@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1"
-    android:background="#ffffff">
+    android:layout_height="match_parent">
 
-
-    <ListView
-        android:id="@+id/List_view"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@drawable/divide_line"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/bottom_bar">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_3"
+        android:layout_weight="0.74" />
 
     <nova.croprotector.ButtonBar
         android:id="@+id/bottom_bar"
@@ -25,5 +18,4 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true" />
 
-
-</RelativeLayout>
+</LinearLayout>
