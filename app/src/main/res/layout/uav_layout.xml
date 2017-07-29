@@ -12,29 +12,50 @@
         android:text = "连接您的无人机"
         android:textColor = "#006600"
         android:textSize = "25dp"
-        android:layout_marginTop = "120dp"
-        android:layout_marginLeft = "100dp"/>
+        android:layout_marginTop = "113dp"
+        android:layout_marginLeft = "100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:id = "@+id/uav_image"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:src = "@drawable/uav"
-        android:layout_below = "@+id/uav_text"
-        android:layout_marginTop = "60dp"
-        android:layout_marginLeft = "70dp"/>
+        android:layout_marginLeft = "70dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id = "@+id/connected"
         android:gravity="center"
-        android:layout_width = "200dp"
+        android:layout_width = "150dp"
         android:layout_height = "40dp"
         android:text="连接"
-        android:layout_below = "@+id/uav_image"
+        android:textColor="@color/darkGreen"
         android:textSize="25dp"
-        android:layout_marginTop="40dp"
         android:layout_marginLeft="90dp"
-        android:background="@drawable/button_shape"/>
+        android:background="@drawable/button_shape"
+        android:layout_marginStart="22dp"
+        android:layout_below="@+id/uav_image"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp" />
+
+    <Button
+        android:id = "@+id/setting"
+        android:gravity="center"
+        android:layout_width = "150dp"
+        android:layout_height = "40dp"
+        android:text="设置"
+        android:textColor="@color/darkGreen"
+        android:textSize="25dp"
+        android:layout_marginLeft="90dp"
+        android:background="@drawable/button_shape"
+        android:layout_toLeftOf="@+id/connected"
+        android:layout_marginTop="50dp"
+        android:layout_alignBottom="@+id/connected"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="15dp" />
 
     <nova.croprotector.ButtonBar
         android:id="@+id/bottom_bar"

@@ -64,20 +64,25 @@
         <activity android:name=".DiseaseActivity" />
         <activity android:name=".EditpasswordActivity" />
         <activity android:name=".DiseaseMapActivity"
-                  android:launchMode="singleTop"></activity>
+                  android:launchMode="singleTop"/>
         <activity android:name="Login_activity">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+            </intent-filter>-->
         </activity>
-        <activity android:name="regist_activity"></activity>
+        <activity android:name="regist_activity"/>
         <activity android:name="Map_activity"
-            android:launchMode="singleTop"></activity>
+            android:launchMode="singleTop"/>
         <activity android:name="Shoot_activity"
-            android:launchMode="singleTop"></activity>
+            android:launchMode="singleTop"/>
         <activity android:name="UAV_activity"
-            android:launchMode="singleTop"></activity>
+            android:launchMode="singleTop">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
+        </intent-filter>
+        </activity>
 
     </application>
 
