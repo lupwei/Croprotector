@@ -18,7 +18,7 @@ public class Map_activity extends AppCompatActivity{
     }
     public static void actionStart(Context context){
         //活动启动器
-        Intent intent=new Intent(context,map_activity.class);
+        Intent intent=new Intent(context,Map_activity.class);
         context.startActivity(intent);
     }
 }

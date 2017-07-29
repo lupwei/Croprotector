@@ -25,7 +25,7 @@
             android:layout_marginTop="155dp"
             android:layout_marginLeft="70dp"
             android:text="@string/login_label_username"
-            android:textColor="000099"
+            android:textColor="#000099"
             android:textSize="20dp" />
 
         <!--用户名输入框(输入邮箱地址和手机号码);-->
@@ -39,7 +39,7 @@
             android:layout_marginLeft="70dp"
             android:hint="@string/login_username_hint"
             android:inputType="text"
-            android:singleLine="true"
+            android:maxLines="1"
             android:textColorHint="#989898" />
 
         <!--密码textview；-->
@@ -52,7 +52,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginLeft="70dp"
             android:text="@string/login_label_password"
-            android:textColor="000099"
+            android:textColor="#000099"
             android:textSize="20dp" />
 
         <!--密码输入框；-->
@@ -66,8 +66,7 @@
             android:layout_marginLeft="70dp"
             android:hint="@string/login_password_hint"
             android:inputType="textPassword"
-            android:password="true"
-            android:singleLine="true"
+            android:maxLines="1"
             android:textColorHint="#989898" />
 
         <!--注册按钮；-->
