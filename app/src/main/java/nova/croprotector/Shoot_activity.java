@@ -13,7 +13,7 @@ import android.widget.Button;
 public class Shoot_activity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.regist_layout);
+        setContentView(R.layout.camera_layout);
 
         Button camera = (Button) findViewById(R.id.shoot_button);
         Button album = (Button) findViewById(R.id.album_button);

@@ -14,7 +14,7 @@ import android.widget.Button;
 public class Map_activity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.regist_layout);
+        setContentView(R.layout.map_layout);
     }
     public static void actionStart(Context context){
         //活动启动器
