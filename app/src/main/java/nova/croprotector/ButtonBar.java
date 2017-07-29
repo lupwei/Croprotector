@@ -28,6 +28,7 @@ public class ButtonBar extends LinearLayout {
                 switch (radiobuttonId) {
                     case R.id.rb_about:
                         //跳转到无人机界面
+                        UAV_activity.actionStart(context);
                         break;
                     case R.id.rb_introduction:
                         //跳转到拍照界面
@@ -38,6 +39,7 @@ public class ButtonBar extends LinearLayout {
                         Map_activity.actionStart(context);
                         break;
                     case R.id.rb_service:
+                        //跳转到用户界面
                         UserActivity.actionStart(context);
                         break;
                     default:

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation = "vertical"
+    android:layout_width = "match_parent"
+    android:layout_height = "match_parent"
+    android:background = "#ffffff">
+
+    <TextView
+        android:id = "@+id/uav_text"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:text = "连接您的无人机"
+        android:textColor = "#006600"
+        android:textSize = "25dp"
+        android:layout_marginTop = "120dp"
+        android:layout_marginLeft = "100dp"/>
+
+    <ImageView
+        android:id = "@+id/uav_image"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:src = "@drawable/uav"
+        android:layout_below = "@+id/uav_text"
+        android:layout_marginTop = "60dp"
+        android:layout_marginLeft = "70dp"/>
+
+    <Button
+        android:id = "@+id/connected"
+        android:gravity="center"
+        android:layout_width = "200dp"
+        android:layout_height = "40dp"
+        android:text="连接"
+        android:layout_below = "@+id/uav_image"
+        android:textSize="25dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="90dp"
+        android:background="@drawable/button_shape"/>
+
+    <nova.croprotector.ButtonBar
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>

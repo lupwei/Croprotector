@@ -76,6 +76,8 @@
             android:launchMode="singleTop"></activity>
         <activity android:name="Shoot_activity"
             android:launchMode="singleTop"></activity>
+        <activity android:name="UAV_activity"
+            android:launchMode="singleTop"></activity>
 
     </application>
 

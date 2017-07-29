@@ -22,17 +22,20 @@ public class Shoot_activity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
+                //编写点击拍照按钮的函数
+                Shoot_activity.actionStart(Shoot_activity.this);
             }
         });
         album.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                //编写点击从相册选取照片的函数
+                Shoot_activity.actionStart(Shoot_activity.this);
             }
         });
     }
     public static void actionStart(Context context){
-        //活动启动器
         Intent intent=new Intent(context,Shoot_activity.class);
         context.startActivity(intent);
     }
