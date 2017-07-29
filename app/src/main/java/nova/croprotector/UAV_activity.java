@@ -11,10 +11,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+
 public class UAV_activity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.regist_layout);
+            setContentView(R.layout.uav_layout);
 
             Button connected = (Button) findViewById(R.id.connected);
             connected.setOnClickListener(new View.OnClickListener() {
