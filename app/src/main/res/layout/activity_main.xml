@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <!--底部导航栏-->
+    <RadioGroup
+        android:id="@+id/button_bar"
+        android:layout_width="match_parent"
+        android:layout_height="57dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+        <RadioButton
+            android:id="@+id/button_UAV"
+            style="@style/main_tab_bottom"
+            android:checked="true"
+            android:drawableTop="@drawable/uav_selector"
+            android:text="无人机" />
+        <RadioButton
+            android:id="@+id/button_shoot"
+            style="@style/main_tab_bottom"
+            android:layout_marginLeft="20dp"
+            android:checked="false"
+            android:drawableTop="@drawable/shoot_selector"
+            android:text="拍照" />
+        <RadioButton
+            android:id="@+id/button_map"
+            style="@style/main_tab_bottom"
+            android:layout_marginLeft="20dp"
+            android:checked="false"
+            android:drawableTop="@drawable/map_selector"
+            android:text="地图" />
+        <RadioButton
+            android:id="@+id/button_user"
+            style="@style/main_tab_bottom"
+            android:layout_marginLeft="20dp"
+            android:checked="false"
+            android:drawableTop="@drawable/user_selector"
+            android:text="我的" />
+    </RadioGroup>
+
+    <!--底部菜单栏上方的分割线-->
+    <View
+        android:id="@+id/button_bar_topline"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#0a7b51"
+        android:layout_above="@id/button_bar"/>
+
+    <!--用于摆放各个按钮对应的布局-->
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/button_bar_topline"
+        android:background="@color/white">
+    </FrameLayout>
+
+
+</RelativeLayout>
