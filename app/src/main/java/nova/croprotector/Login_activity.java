@@ -24,7 +24,7 @@ public class Login_activity extends AppCompatActivity{
         login_B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserActivity.actionStart(Login_activity.this);
+                MainActivity.actionStart(Login_activity.this);
             }
         });
         regist_B.setOnClickListener(new View.OnClickListener() {

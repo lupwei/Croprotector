@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation = "vertical"
+    android:layout_width = "match_parent"
+    android:layout_height = "match_parent"
+    android:background = "#ffffff">
+
+    <TextView
+        android:id = "@+id/uav_text"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:text = "连接您的无人机"
+        android:textColor = "#006600"
+        android:textSize = "25dp"
+        android:layout_marginTop = "113dp"
+        android:layout_marginLeft = "100dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id = "@+id/uav_image"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:src = "@drawable/uav"
+        android:layout_marginLeft = "70dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id = "@+id/connect"
+        android:gravity="center"
+        android:layout_width = "150dp"
+        android:layout_height = "40dp"
+        android:text="连接"
+        android:textColor="@color/darkGreen"
+        android:textSize="25dp"
+        android:layout_marginLeft="90dp"
+        android:background="@drawable/button_shape"
+        android:layout_marginStart="22dp"
+        android:layout_below="@+id/uav_image"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="50dp" />
+
+    <Button
+        android:id = "@+id/set"
+        android:gravity="center"
+        android:layout_width = "150dp"
+        android:layout_height = "40dp"
+        android:text="设置"
+        android:textColor="@color/darkGreen"
+        android:textSize="25dp"
+        android:layout_marginLeft="90dp"
+        android:background="@drawable/button_shape"
+        android:layout_toLeftOf="@+id/connect"
+        android:layout_marginTop="50dp"
+        android:layout_alignBottom="@+id/connect"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="15dp" />
+
+</RelativeLayout>

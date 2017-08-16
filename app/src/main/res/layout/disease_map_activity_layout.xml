@@ -31,11 +31,5 @@
         android:layout_marginTop="60dp"
         android:id="@+id/view2" />
 
-    <nova.croprotector.ButtonBar
-        android:id="@+id/bottom_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
