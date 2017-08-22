@@ -10,15 +10,23 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
+import com.google.gson.Gson;
+
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 //注册活动；
 public class regist_activity extends AppCompatActivity {
 
     private EditText username_edit;
     private EditText password_edit;
+    private static final MediaType JSON=MediaType.parse("application/json;charset=utf-8");
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -35,7 +43,10 @@ public class regist_activity extends AppCompatActivity {
                 if(v.getId()==R.id.complete) {
                     String phonenumber = username_edit.getText().toString();
                     String password=password_edit.getText().toString();
-                    sendRequest(phonenumber,password);
+                    User user=new User();
+                    user.setPhoneNumber(phonenumber);
+                    user.setPassword(password);
+                    sendRequest(user);
                     MainActivity.actionStart(regist_activity.this);
                 }
             }
@@ -47,11 +58,25 @@ public class regist_activity extends AppCompatActivity {
         context.startActivity(intent);
     }
 
-    private void sendRequest(String phonenumber,String password){
+    private void sendRequest(final User user){
         new Thread(new Runnable(){
             @Override
             public void run(){
-                OkHttpClient client=new OkHttpClient();
+                try{
+                    Gson gson=new Gson();
+                    String jsonStr=gson.toJson(user);
+                    OkHttpClient client=new OkHttpClient();
+                    RequestBody requestBody=RequestBody.create(JSON,jsonStr);
+                    Request request=new Request.Builder()
+                            .url("http://10.110.210.21:8080/Croprotector/RegisterServlet")
+                            .post(requestBody)
+                            .build();
+                    Response response=client.newCall(request).execute();
+                    String responseData=response.body().string();
+                    Toast.makeText(regist_activity.this,responseData,Toast.LENGTH_SHORT).show();
+                }catch(Exception e){
+                    e.printStackTrace();
+                }
             }
         }).start();
     }

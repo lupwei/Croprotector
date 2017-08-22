@@ -5,24 +5,24 @@ package nova.croprotector;
  */
 
 public class User {
-    private String username;
+    private String phonenumber;
     private String password;
 
-    public void User(String username,String password){
-        this.username = username;
+    public void User(String phonenumber,String password){
+        this.phonenumber = phonenumber;
         this.password = password;
     }
 
-    public String Get_username(){
-        return username;
+    public String Get_phonenumber(){
+        return phonenumber;
     }
 
     public String Get_password(){
         return password;
     }
 
-    public void setUsername(String username){
-        this.username = username;
+    public void setPhoneNumber(String phonenumber){
+        this.phonenumber = phonenumber;
     }
 
     public void setPassword(String password){
