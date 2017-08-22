@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -40,44 +39,43 @@ public class regist_activity extends AppCompatActivity {
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(v.getId()==R.id.complete) {
+                if (v.getId() == R.id.complete) {
                     String phonenumber = username_edit.getText().toString();
-                    String password=password_edit.getText().toString();
-                    User user=new User();
+                    String password = password_edit.getText().toString();
+                    User user = new User();
                     user.setPhoneNumber(phonenumber);
                     user.setPassword(password);
                     sendRequest(user);
                     MainActivity.actionStart(regist_activity.this);
                 }
             }
-        });
-    }
-    public static void actionStart(Context context){
-        //活动启动器
-        Intent intent=new Intent(context,regist_activity.class);
-        context.startActivity(intent);
-    }
 
-    private void sendRequest(final User user){
-        new Thread(new Runnable(){
-            @Override
-            public void run(){
-                try{
-                    Gson gson=new Gson();
-                    String jsonStr=gson.toJson(user);
-                    OkHttpClient client=new OkHttpClient();
-                    RequestBody requestBody=RequestBody.create(JSON,jsonStr);
-                    Request request=new Request.Builder()
-                            .url("http://10.110.210.21:8080/Croprotector/RegisterServlet")
-                            .post(requestBody)
-                            .build();
-                    Response response=client.newCall(request).execute();
-                    String responseData=response.body().string();
-                    Toast.makeText(regist_activity.this,responseData,Toast.LENGTH_SHORT).show();
-                }catch(Exception e){
-                    e.printStackTrace();
-                }
+            public void actionStart(Context context) {
+                //活动启动器
+                Intent intent = new Intent(context, regist_activity.class);
+                context.startActivity(intent);
             }
-        }).start();
-    }
-}
+
+            private void sendRequest(final User user) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Gson gson = new Gson();
+                            String jsonStr = gson.toJson(user);
+                            OkHttpClient client = new OkHttpClient();
+                            RequestBody requestBody = RequestBody.create(JSON, jsonStr);
+                            Request request = new Request.Builder()
+                                    .url("http://10.110.210.21:8080/Croprotector/RegisterServlet")
+                                    .post(requestBody)
+                                    .build();
+                            Response response = client.newCall(request).execute();
+                            String responseData = response.body().string();
+                            Toast.makeText(regist_activity.this, responseData, Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+
