@@ -19,7 +19,7 @@ public class regist_activity extends AppCompatActivity {
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UAVControllerActivity.actionStart(regist_activity.this);
+                MainActivity.actionStart(regist_activity.this);
             }
         });
     }
