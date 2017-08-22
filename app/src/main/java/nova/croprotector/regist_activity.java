@@ -28,13 +28,13 @@ public class regist_activity extends AppCompatActivity {
     private static final MediaType JSON=MediaType.parse("application/json;charset=utf-8");
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.regist_layout);
 
         Button complete = (Button) findViewById(R.id.complete);
-        username_edit=(EditText)findViewById(R.id.username_edit);
-        password_edit=(EditText)findViewById(R.id.password_edit);
+        username_edit = (EditText) findViewById(R.id.username_edit);
+        password_edit = (EditText) findViewById(R.id.password_edit);
 
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,11 +49,13 @@ public class regist_activity extends AppCompatActivity {
                     MainActivity.actionStart(regist_activity.this);
                 }
             }
-
+        });
+    }
             public void actionStart(Context context) {
                 //活动启动器
                 Intent intent = new Intent(context, regist_activity.class);
                 context.startActivity(intent);
+                MainActivity.actionStart(regist_activity.this);
             }
 
             private void sendRequest(final User user) {
@@ -78,4 +80,4 @@ public class regist_activity extends AppCompatActivity {
                     }
                 }).start();
             }
-
+        }
