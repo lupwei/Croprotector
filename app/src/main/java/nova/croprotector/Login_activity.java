@@ -8,9 +8,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
+
 //登录活动；
 public class Login_activity extends AppCompatActivity{
     @Override
@@ -24,7 +23,7 @@ public class Login_activity extends AppCompatActivity{
         login_B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.actionStart(Login_activity.this);
+                UAVControllerActivity.actionStart(Login_activity.this);
             }
         });
         regist_B.setOnClickListener(new View.OnClickListener() {

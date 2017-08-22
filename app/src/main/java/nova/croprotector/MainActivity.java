@@ -17,7 +17,6 @@ import android.util.Log;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-import butterknife.ButterKnife;
 
 import dji.common.error.DJIError;
 import dji.common.error.DJISDKError;

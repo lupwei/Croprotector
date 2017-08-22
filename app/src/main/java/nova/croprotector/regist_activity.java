@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 //注册活动；
 public class regist_activity extends AppCompatActivity {
@@ -20,7 +19,7 @@ public class regist_activity extends AppCompatActivity {
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.actionStart(regist_activity.this);
+                UAVControllerActivity.actionStart(regist_activity.this);
             }
         });
     }
