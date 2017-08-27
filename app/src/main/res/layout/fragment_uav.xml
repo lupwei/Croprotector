@@ -5,13 +5,14 @@
     android:layout_height = "match_parent"
     android:background = "#ffffff">
 
+
     <TextView
         android:id = "@+id/uav_text"
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:text = "连接您的无人机"
-        android:textColor = "#006600"
-        android:textSize = "25dp"
+        android:textColor = "@color/darkGreen"
+        android:textSize = "25sp"
         android:layout_marginTop = "113dp"
         android:layout_marginLeft = "100dp"
         android:layout_alignParentTop="true"
@@ -22,11 +23,51 @@
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:src = "@drawable/uav"
+        android:layout_below="@+id/uav_text"
+        android:layout_marginTop="39dp"
         android:layout_marginLeft = "70dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:id="@+id/text_connection_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="连接状态：未检测到设备"
+        android:textColor="@color/darkGreen"
+        android:textSize="20sp"
+        android:layout_below="@+id/uav_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="89dp" />
+
+    <TextView
+        android:id="@+id/text_product_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/product_information"
+        android:textColor="@color/darkGreen"
+        android:textSize="20dp"
+        android:layout_below="@+id/text_connection_status"
+        android:layout_marginTop="-40dp"
+        android:layout_centerHorizontal="true" />
+
+
     <Button
+        android:id="@+id/connect"
+        android:layout_width="150dp"
+        android:layout_height="55dp"
+        android:background="@drawable/round_btn"
+        android:text="连接"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:layout_below="@+id/text_product_info"
+        android:layout_marginBottom="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true" />
+
+    <!--<Button
         android:id = "@+id/connect"
         android:gravity="center"
         android:layout_width = "150dp"
@@ -34,14 +75,12 @@
         android:text="连接"
         android:textColor="@color/darkGreen"
         android:textSize="25dp"
-        android:layout_marginLeft="90dp"
         android:background="@drawable/button_shape"
-        android:layout_marginStart="22dp"
         android:layout_below="@+id/uav_image"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="50dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp" />-->
 
-    <Button
+    <!--<Button
         android:id = "@+id/set"
         android:gravity="center"
         android:layout_width = "150dp"
@@ -55,6 +94,6 @@
         android:layout_marginTop="50dp"
         android:layout_alignBottom="@+id/connect"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp" />
+        android:layout_marginEnd="15dp" />-->
 
 </RelativeLayout>
