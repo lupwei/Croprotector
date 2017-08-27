@@ -26,7 +26,7 @@ import okhttp3.Response;
 public class Login_activity extends AppCompatActivity{
     private EditText username_edit;
     private EditText password_edit;
-    private String message;
+    private CommonResponse<String> res=new CommonResponse<String>();
     private static final MediaType JSON=MediaType.parse("application/json;charset=utf-8");
     Gson gson = new Gson();
 
@@ -53,26 +53,31 @@ public class Login_activity extends AppCompatActivity{
 
                 String jsonStr=gson.toJson(user);
                 RequestBody requestBody=RequestBody.create(JSON,jsonStr);
-                HttpUtil.sendHttpRequest("http://172.20.10.14:8080/Croprotector/RegisterServlet",requestBody,new okhttp3.Callback(){
+                HttpUtil.sendHttpRequest("http://172.20.10.14:8080/Croprotector/LoginServlet",requestBody,new okhttp3.Callback(){
                     @Override
                     public void onResponse(Call call, Response response) throws IOException{
                         String responseData = response.body().string();
-                        message=gson.fromJson(responseData,String.class);
-                        Looper.prepare();
-                        Toast.makeText(Login_activity.this, message, Toast.LENGTH_SHORT).show();
-                        Looper.loop();
+                        res=GsonToBean.fromJsonObject(responseData,String.class);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                if(res.code==0){
+                                    Toast.makeText(Login_activity.this, res.data, Toast.LENGTH_SHORT).show();
+                                    MainActivity.actionStart(Login_activity.this);
+                                }
+                                else{
+                                    Toast.makeText(Login_activity.this, res.data, Toast.LENGTH_SHORT).show();
+                                    Login_activity.actionStart(Login_activity.this);
+                                }
+                            }
+                        });
+
                     }
                     @Override
                     public void onFailure(Call call,IOException e){
                         //异常处理
                     }
                 });
-                if(message=="登陆成功"){
-                    MainActivity.actionStart(Login_activity.this);
-                }
-                else{
-                    Login_activity.actionStart(Login_activity.this);
-                }
             }
         });
         regist_B.setOnClickListener(new View.OnClickListener() {
