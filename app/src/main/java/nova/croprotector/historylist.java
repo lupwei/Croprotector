@@ -9,7 +9,7 @@ public class historylist {
     private String num;
     private int imageid;
 
-    public historylist(String diseasename,String num,int imageid){
+    public historylist(String diseasename, String num, int imageid){
         this.diseasename=diseasename;
         this.num=num;
         this.imageid=imageid;

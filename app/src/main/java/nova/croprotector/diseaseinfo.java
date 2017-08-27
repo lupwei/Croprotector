@@ -9,7 +9,7 @@ public class diseaseinfo {
     private String time;                          //将来换成时间，数据类型可能要变
     private int imageId;
 
-    public diseaseinfo(String location,String time,int imageId){
+    public diseaseinfo(String location, String time, int imageId){
         this.location=location;
         this.time=time;
         this.imageId=imageId;

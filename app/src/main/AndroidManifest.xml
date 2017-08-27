@@ -60,7 +60,6 @@
         <service android:name="dji.sdk.sdkmanager.DJIGlobalService" />
         <!-- DJI SDK -->
 
-        <activity android:name=".HistoryActivity" />
         <activity android:name=".DiseaseActivity" />
         <activity
             android:name=".DiseaseMapActivity"
@@ -75,14 +74,14 @@
             -->
         </activity>
         <activity android:name=".regist_activity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditPasswordActivity" />
         <activity android:name=".UAVControllerActivity"></activity>
     </application>
 

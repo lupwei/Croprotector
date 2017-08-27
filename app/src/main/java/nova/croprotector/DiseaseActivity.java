@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DiseaseActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private List<diseaseinfo> diseaseinfoList=new ArrayList<>();
+    private List<diseaseinfo> diseaseInfoList =new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +23,13 @@ public class DiseaseActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.disease_activity_layout);
         for(int i=0;i<15;i++){
             diseaseinfo disease1=new diseaseinfo("100,102","2017.7.26",R.drawable.disease_pic1);           //随便瞎加的测试数据，循环是为了防止数据项太少了
-            diseaseinfoList.add(disease1);
+            diseaseInfoList.add(disease1);
         }
         RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        DiseaseinfoAdaptar adaptar=new DiseaseinfoAdaptar(diseaseinfoList);
-        recyclerView.setAdapter(adaptar);
+        DiseaseInfoAdapter adapter=new DiseaseInfoAdapter(diseaseInfoList);
+        recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         Button button1=(Button)findViewById(R.id.infolist);
         button1.setOnClickListener(this);

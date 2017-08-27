@@ -44,7 +44,7 @@ public class regist_activity extends AppCompatActivity {
 
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {/*
                 if (v.getId() == R.id.complete) {
                     String phonenumber = username_edit.getText().toString();
                     String password = password_edit.getText().toString();
@@ -75,7 +75,7 @@ public class regist_activity extends AppCompatActivity {
                     else{
                         regist_activity.actionStart(regist_activity.this);
                     }
-                }
+                }*/
             }
         });
     }
