@@ -4,23 +4,7 @@
         "source": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\layout\\dialog_login.xml"
     },
     {
-        "merged": "C:\\Users\\ZTH\\work\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\log_dialog_view.xml",
-        "source": "C:\\Users\\ZTH\\work\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\layout\\log_dialog_view.xml"
-    },
-    {
         "merged": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\log_dialog_view.xml",
         "source": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\layout\\log_dialog_view.xml"
-    },
-    {
-        "merged": "C:\\Users\\ZTH\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\log_dialog_view.xml",
-        "source": "C:\\Users\\ZTH\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\layout\\log_dialog_view.xml"
-    },
-    {
-        "merged": "C:\\Users\\ZTH\\work\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\dialog_login.xml",
-        "source": "C:\\Users\\ZTH\\work\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\layout\\dialog_login.xml"
-    },
-    {
-        "merged": "C:\\Users\\ZTH\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\dialog_login.xml",
-        "source": "C:\\Users\\ZTH\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\layout\\dialog_login.xml"
     }
 ]

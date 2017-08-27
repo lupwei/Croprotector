@@ -10,7 +10,7 @@
 
 
     <!--底部导航栏-->
-    <RadioGroup
+    <!--<RadioGroup
         android:id="@+id/button_bar"
         android:layout_width="match_parent"
         android:layout_height="57dp"
@@ -44,15 +44,15 @@
             android:checked="false"
             android:drawableTop="@drawable/user_selector"
             android:text="我的" />
-    </RadioGroup>
+    </RadioGroup>-->
 
     <!--底部菜单栏上方的分割线-->
-    <View
+    <!--<View
         android:id="@+id/button_bar_topline"
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:background="#0a7b51"
-        android:layout_above="@id/button_bar"/>
+        android:layout_above="@id/button_bar"/>-->
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -63,7 +63,7 @@
             android:id="@+id/toolBar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="#388E3C"
             android:minHeight="?attr/actionBarSize"
             android:paddingTop="@dimen/tool_bar_top_padding"/>
 
@@ -79,7 +79,7 @@
     </RelativeLayout>
 
     <!--侧边菜单-->
-    <ListView
+    <!--<ListView
         android:id="@+id/list_left_drawer"
         android:layout_width="250dp"
         android:layout_height="match_parent"
@@ -87,7 +87,16 @@
         android:background="@color/white"
         android:choiceMode="singleChoice"
         android:divider="#FFFFFF"
-        android:dividerHeight="1dp" />
+        android:dividerHeight="1dp" />-->
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/menu"
+        app:headerLayout="@layout/header"/>
+
 
 </android.support.v4.widget.DrawerLayout>
 
