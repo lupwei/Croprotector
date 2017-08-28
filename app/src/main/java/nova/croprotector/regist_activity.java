@@ -4,7 +4,6 @@ package nova.croprotector;
  */
 import android.content.Context;
 import android.content.Intent;
-import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -19,16 +18,15 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
 //注册活动；
 public class regist_activity extends AppCompatActivity {
 
-    private EditText username_edit;
+    private EditText phoneNumber_input;
     private EditText password_edit;
+    private EditText userName_input;
     private CommonResponse<String> res=new CommonResponse<String>();
     private static final MediaType JSON=MediaType.parse("application/json;charset=utf-8");
     Gson gson = new Gson();
@@ -39,13 +37,14 @@ public class regist_activity extends AppCompatActivity {
         setContentView(R.layout.regist_layout);
 
         Button complete = (Button) findViewById(R.id.complete);
-        username_edit = (EditText) findViewById(R.id.username_edit);
+        phoneNumber_input = (EditText) findViewById(R.id.phoneNumber_input);
         password_edit = (EditText) findViewById(R.id.password_edit);
+        userName_input = (EditText) findViewById(R.id.userName_input);
 
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phonenumber = username_edit.getText().toString();
+                String phonenumber = phoneNumber_input.getText().toString();
                 String password = password_edit.getText().toString();
                 User user = new User();
                 user.setPhoneNumber(phonenumber);

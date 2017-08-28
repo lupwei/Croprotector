@@ -6,9 +6,26 @@
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryDark">#388E3C</item>
         <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">#8BC34A</item>
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
         <item name="android:listDivider">@drawable/divide_line</item>
         <!--<item name="actionBarSize">10dp</item>-->
+    </style>
+
+
+    <style name="AppTheme_0" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">#388E3C</item>
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <item name="colorAccent">#8BC34A</item>
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <item name="android:listDivider">@drawable/divide_line</item>
+        <!--<item name="actionBarSize">10dp</item>-->
+        <item name="colorControlNormal">@color/iron</item>
+        <item name="colorControlActivated">@color/iron</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:textColorHint">@color/iron</item>
     </style>
 
 

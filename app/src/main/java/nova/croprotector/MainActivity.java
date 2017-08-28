@@ -46,11 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private Handler mHandler;
 
 
-    //底边栏所需变量
-    /*private RadioGroup rg_button_bar;
-    private RadioButton rb_UAV;
-    private RadioButton rb_Password;*/
-
     private long exitTime = 0;
 
     //Fragment 对象
@@ -63,11 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fManager;
 
     //left menu
-    //private DrawerLayout drawer_layout;
     private DrawerLayout drawerLayout;
-    //private ListView list_left_drawer;
-    //private ArrayList<Item> menuLists;
-    //private MyAdapter<Item> myAdapter = null;
 
     private final String[] PERMISSIONS=new String[]{
             Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.VIBRATE,
@@ -142,31 +133,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        //setSupportActionBar(myToolbar);
-
-        //left menu
-        /*drawer_layout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        list_left_drawer = (ListView) findViewById(R.id.list_left_drawer);
-
-        menuLists = new ArrayList<Item>();
-        menuLists.add(new Item(R.mipmap.a,"无人机"));
-        menuLists.add(new Item(R.mipmap.b_1,"拍照"));
-        menuLists.add(new Item(R.mipmap.c_1,"附近"));
-        menuLists.add(new Item(R.mipmap.d_1,"修改密码"));
-        menuLists.add(new Item(R.mipmap.d_1,"历史记录"));
-        menuLists.add(new Item(R.mipmap.d_1,"注销"));
-        myAdapter = new MyAdapter<Item>(menuLists,R.layout.item_list) {
-            @Override
-            public void bindView(ViewHolder holder, Item obj) {
-                holder.setImageResource(R.id.img_icon,obj.getIconId());
-                holder.setText(R.id.txt_content, obj.getIconName());
-            }
-        };
-        list_left_drawer.setAdapter(myAdapter);
-        list_left_drawer.setOnItemClickListener(this);*/
-
-
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
                 PackageManager.PERMISSION_DENIED) {
@@ -185,17 +151,6 @@ public class MainActivity extends AppCompatActivity {
         mHandler = new Handler(Looper.getMainLooper());
         DJISDKManager.getInstance().registerApp(this, mDJISDKManagerCallback);
 
-        /*fManager = getFragmentManager();
-        rg_button_bar = (RadioGroup) findViewById(R.id.button_bar);
-        rg_button_bar.setOnCheckedChangeListener(this);
-        //获取第一个单选按钮，并设置其为选中状态
-        rb_UAV = (RadioButton) findViewById(R.id.button_UAV);
-        rb_Password = (RadioButton) findViewById(R.id.button_user);
-        rb_Password.setChecked(true);
-        rb_UAV.setChecked(true);
-        //模拟一次点击，既进去后选择第一项
-        rb_Password.performClick();
-        rb_UAV.performClick();*/
     }
 
     // DJISDKManager callback and implementations of onGetRegisteredResult and onProductChanged
@@ -259,89 +214,6 @@ public class MainActivity extends AppCompatActivity {
     };
     //DJI finished
 
-
-    //left menu
-    /*@Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        FragmentTransaction fTransaction = fManager.beginTransaction();
-        //hideAllFragment(fTransaction);
-        switch (position){
-            case 0:
-                    uavFragment = new UAV_fragment();
-                fTransaction.replace(R.id.fragment_container,uavFragment).commit();
-                break;
-            case 1:
-                    shootFragment = new Shoot_fragment();
-                fTransaction.replace(R.id.fragment_container,shootFragment).commit();
-                break;
-            case 2:
-                    mapFragment = new Map_fragment();
-                fTransaction.replace(R.id.fragment_container,mapFragment).commit();
-                break;
-            case 3:
-                    passwordFragment = new EditPassword_fragment();
-                fTransaction.replace(R.id.fragment_container, passwordFragment).commit();
-                break;
-            case 4:
-                historyFragment=new History_fragment();
-                fTransaction.replace(R.id.fragment_container, historyFragment).commit();
-                break;
-            case 5:
-                Login_activity.actionStart(this);
-                break;
-        }
-        drawer_layout.closeDrawer(list_left_drawer);
-    }*/
-
-    //fragment跳转
-    /*@Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        FragmentTransaction fTransaction = fManager.beginTransaction();
-        hideAllFragment(fTransaction);
-        switch (checkedId){
-            case R.id.button_UAV:
-                if(uavFragment == null){
-                    uavFragment = new UAV_fragment();
-                    fTransaction.add(R.id.fragment_container,uavFragment);
-                }else{
-                    fTransaction.show(uavFragment);
-                }
-                break;
-            case R.id.button_shoot:
-                if(shootFragment == null){
-                    shootFragment = new Shoot_fragment();
-                    fTransaction.add(R.id.fragment_container,shootFragment);
-                }else{
-                    fTransaction.show(shootFragment);
-                }
-                break;
-            case R.id.button_map:
-                if(mapFragment == null){
-                    mapFragment = new Map_fragment();
-                    fTransaction.add(R.id.fragment_container,mapFragment);
-                }else{
-                    fTransaction.show(mapFragment);
-                }
-                break;
-            case R.id.button_user:
-                if(passwordFragment == null){
-                    passwordFragment = new EditPassword_fragment();
-                    fTransaction.add(R.id.fragment_container, passwordFragment);
-                }else{
-                    fTransaction.show(passwordFragment);
-                }
-                break;
-        }
-        fTransaction.commit();
-    }*/
-
-    //隐藏所有Fragment
-    /*private void hideAllFragment(FragmentTransaction fragmentTransaction){
-        if(uavFragment != null)fragmentTransaction.hide(uavFragment);
-        if(shootFragment != null)fragmentTransaction.hide(shootFragment);
-        if(mapFragment != null)fragmentTransaction.hide(mapFragment);
-        if(passwordFragment != null)fragmentTransaction.hide(passwordFragment);
-    }*/
 
     public static void actionStart(Context context){
         //活动启动器

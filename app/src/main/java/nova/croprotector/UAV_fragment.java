@@ -2,6 +2,7 @@ package nova.croprotector;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import dji.sdk.base.BaseProduct;
 import dji.sdk.products.Aircraft;
@@ -35,6 +37,15 @@ public class UAV_fragment extends Fragment implements View.OnClickListener {
         IntentFilter filter = new IntentFilter();
         filter.addAction(FPVDemoApplication.FLAG_CONNECTION_CHANGE);
         getActivity().registerReceiver(mReceiver, filter);
+
+        FloatingActionButton fab=(FloatingActionButton)view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(UAV_fragment.this.getActivity(), "FAB clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return view;
     }
 

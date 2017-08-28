@@ -11,9 +11,11 @@
         android:layout_width = "wrap_content"
         android:layout_height = "wrap_content"
         android:text = "连接您的无人机"
-        android:textColor = "@color/darkGreen"
+        android:textColor = "@color/black"
         android:textSize = "25sp"
-        android:layout_marginTop = "113dp"
+        android:textStyle="normal"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginTop = "37dp"
         android:layout_marginLeft = "100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -35,8 +37,9 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="连接状态：未检测到设备"
-        android:textColor="@color/darkGreen"
+        android:textColor="@color/black"
         android:textSize="20sp"
+        android:typeface="serif"
         android:layout_below="@+id/uav_image"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="89dp" />
@@ -46,8 +49,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/product_information"
-        android:textColor="@color/darkGreen"
+        android:textColor="@color/black"
         android:textSize="20dp"
+        android:typeface="serif"
         android:layout_below="@+id/text_connection_status"
         android:layout_marginTop="-40dp"
         android:layout_centerHorizontal="true" />
@@ -67,33 +71,17 @@
         android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true" />
 
-    <!--<Button
-        android:id = "@+id/connect"
-        android:gravity="center"
-        android:layout_width = "150dp"
-        android:layout_height = "40dp"
-        android:text="连接"
-        android:textColor="@color/darkGreen"
-        android:textSize="25dp"
-        android:background="@drawable/button_shape"
-        android:layout_below="@+id/uav_image"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp" />-->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:src="@mipmap/ic_settings_white_48dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="55dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/uav_text" />
 
-    <!--<Button
-        android:id = "@+id/set"
-        android:gravity="center"
-        android:layout_width = "150dp"
-        android:layout_height = "40dp"
-        android:text="设置"
-        android:textColor="@color/darkGreen"
-        android:textSize="25dp"
-        android:layout_marginLeft="90dp"
-        android:background="@drawable/button_shape"
-        android:layout_toLeftOf="@+id/connect"
-        android:layout_marginTop="50dp"
-        android:layout_alignBottom="@+id/connect"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="15dp" />-->
 
 </RelativeLayout>
