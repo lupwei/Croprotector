@@ -1,11 +1,15 @@
 package nova.croprotector;
 
+import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -15,45 +19,50 @@ import java.util.List;
 
 public class DiseaseInfoAdapter extends RecyclerView.Adapter<DiseaseInfoAdapter.ViewHolder>{
 
-    private List<diseaseinfo> mydiseaseinfolist;
+    private List<diseaseinfo> myDiseaseInfoList;
+    private Context mContext;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView time;
         TextView location;
         ImageView disease_pic;
-        View divideline;
+        CardView cardView;
 
         public ViewHolder(View view){
             super(view);
-            time=(TextView)view.findViewById(R.id.time);
-            location=(TextView)view.findViewById(R.id.location);
-            disease_pic=(ImageView)view.findViewById(R.id.disease_pic);
+            cardView=(CardView)view;
+            time=(TextView)view.findViewById(R.id.disease_time);
+            location=(TextView)view.findViewById(R.id.disease_gps);
+            disease_pic=(ImageView)view.findViewById(R.id.disease_image);
         }
     }
 
 
     public DiseaseInfoAdapter(List<diseaseinfo> diseaseInfoList){
-        mydiseaseinfolist= diseaseInfoList;
+        myDiseaseInfoList = diseaseInfoList;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.disease_info,parent,false);
-        ViewHolder holder=new ViewHolder(view);
-        return holder;
+        if (mContext==null){
+            mContext=parent.getContext();
+        }
+        View view= LayoutInflater.from(mContext).inflate(R.layout.disease_item,parent,false);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder,int position){
-        diseaseinfo disease=mydiseaseinfolist.get(position);
+        diseaseinfo disease= myDiseaseInfoList.get(position);
         holder.time.setText(disease.getTime());
         holder.location.setText(disease.getLocation());
-        holder.disease_pic.setImageResource(disease.getImageId());
+        Glide.with(mContext).load(disease.getImageId()).into(holder.disease_pic);
+        //holder.disease_pic.setImageResource(disease.getImageId());
     }
 
     @Override
     public int getItemCount(){
-        return mydiseaseinfolist.size();
+        return myDiseaseInfoList.size();
     }
 
 

@@ -45,10 +45,10 @@ public class Login_activity extends AppCompatActivity{
         login_B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phonenumber = username_edit.getText().toString();
+                String phoneNumber = username_edit.getText().toString();
                 String password = password_edit.getText().toString();
                 User user = new User();
-                user.setPhoneNumber(phonenumber);
+                user.setPhoneNumber(phoneNumber);
                 user.setPassword(password);
 
                 String jsonStr=gson.toJson(user);
@@ -83,6 +83,7 @@ public class Login_activity extends AppCompatActivity{
         regist_B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO
                 regist_activity.actionStart(Login_activity.this);
             }
         });

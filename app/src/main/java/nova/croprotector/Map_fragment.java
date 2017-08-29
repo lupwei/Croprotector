@@ -6,9 +6,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Map_fragment extends Fragment {
+import com.amap.api.maps.model.CameraPosition;
+import com.amap.api.maps.model.LatLng;
+
+
+public class Map_fragment extends MapFragmentBase {
 
     public Map_fragment() {}
+
+    public static final LatLng BEIJING = new LatLng(39.90403, 116.407525);// 北京市经纬度
+    protected static CameraPosition cameraPosition;
+
+    @Override
+    LatLng getTarget() {
+        return BEIJING;
+    }
+
+    @Override
+    CameraPosition getCameraPosition() {
+        return cameraPosition;
+    }
+
+    @Override
+    void setCameraPosition(CameraPosition cameraPosition) {
+        Map_fragment.cameraPosition = cameraPosition;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
