@@ -5,6 +5,7 @@ package nova.croprotector;
  */
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,19 +17,23 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-//登录活动；
+//登录活动；还有用户名
 public class Login_activity extends AppCompatActivity{
+
     private EditText username_edit;
     private EditText password_edit;
-    private CommonResponse<String> res=new CommonResponse<String>();
+    private CommonResponse<List<String>> res=new CommonResponse<List<String>>();
     private static final MediaType JSON=MediaType.parse("application/json;charset=utf-8");
     Gson gson = new Gson();
+    User user = new User();
 
 
 
@@ -47,7 +52,6 @@ public class Login_activity extends AppCompatActivity{
             public void onClick(View v) {
                 String phonenumber = username_edit.getText().toString();
                 String password = password_edit.getText().toString();
-                User user = new User();
                 user.setPhoneNumber(phonenumber);
                 user.setPassword(password);
 
@@ -57,16 +61,27 @@ public class Login_activity extends AppCompatActivity{
                     @Override
                     public void onResponse(Call call, Response response) throws IOException{
                         String responseData = response.body().string();
-                        res=GsonToBean.fromJsonObject(responseData,String.class);
+                        res=GsonToBean.fromJsonArray(responseData,String.class);
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                List<String> list=new ArrayList<String>();
+                                String loginMsg;
+                                list=res.data;
                                 if(res.code==0){
-                                    Toast.makeText(Login_activity.this, res.data, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Login_activity.this,list.get(0), Toast.LENGTH_SHORT).show();
+                                    user.setFirstname(list.get(1));
+                                    user.setLastname(list.get(2));
+                                    //存储用户信息到userdata文件中
+                                    SharedPreferences.Editor editor=getSharedPreferences("userdata",MODE_PRIVATE).edit();
+                                    editor.putString("phonenumber",user.Get_phonenumber());
+                                    editor.putString("password",user.Get_password());
+                                    editor.putString("firstname",user.Get_firstname());
+                                    editor.putString("lastname",user.Get_lastname());
                                     MainActivity.actionStart(Login_activity.this);
                                 }
                                 else{
-                                    Toast.makeText(Login_activity.this, res.data, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(Login_activity.this,list.get(0), Toast.LENGTH_SHORT).show();
                                     Login_activity.actionStart(Login_activity.this);
                                 }
                             }

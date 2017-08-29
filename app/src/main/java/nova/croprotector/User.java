@@ -7,10 +7,14 @@ package nova.croprotector;
 public class User {
     private String phonenumber;
     private String password;
+    private String firstname;
+    private String lastname;
 
     public void User(String phonenumber,String password){
         this.phonenumber = phonenumber;
         this.password = password;
+        this.firstname=firstname;
+        this.lastname=lastname;
     }
 
     public String Get_phonenumber(){
@@ -21,6 +25,14 @@ public class User {
         return password;
     }
 
+    public String Get_firstname(){
+        return firstname;
+    }
+
+    public String Get_lastname(){
+        return lastname;
+    }
+
     public void setPhoneNumber(String phonenumber){
         this.phonenumber = phonenumber;
     }
@@ -28,4 +40,13 @@ public class User {
     public void setPassword(String password){
         this.password = password;
     }
+
+    public void setFirstname(String firstname){
+        this.firstname=firstname;
+    }
+
+    public void setLastname(String lastname){
+        this.lastname=lastname;
+    }
+
 }
