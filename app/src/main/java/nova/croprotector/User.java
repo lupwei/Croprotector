@@ -4,7 +4,7 @@ package nova.croprotector;
  * Created by WT on 2017/7/28.
  */
 
-public class User {
+public class User {                                             //现在不分姓和名，只有用户名一项，所以先暂时让firstname和lastname值都为username，只用到firstname
     private String phonenumber;
     private String password;
     private String firstname;

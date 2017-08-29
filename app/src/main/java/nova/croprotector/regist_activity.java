@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,8 +51,11 @@ public class regist_activity extends AppCompatActivity {
             public void onClick(View v) {
                 String phonenumber = phoneNumber_input.getText().toString();
                 String password = password_edit.getText().toString();
+                String username= userName_input.getText().toString();
                 user.setPhoneNumber(phonenumber);
                 user.setPassword(password);
+                user.setFirstname(username);
+                user.setLastname(username);
 
                 String jsonStr=gson.toJson(user);
                 RequestBody requestBody=RequestBody.create(JSON,jsonStr);
@@ -66,11 +70,16 @@ public class regist_activity extends AppCompatActivity {
                                 if(res.code==0){
                                     Toast.makeText(regist_activity.this, res.data, Toast.LENGTH_SHORT).show();
                                     //存储用户信息到userdata文件中
-                                    SharedPreferences.Editor editor=getSharedPreferences("userdata",MODE_PRIVATE).edit();
+                                    SharedPreferences sp=getSharedPreferences("userdata",MODE_PRIVATE);
+                                    SharedPreferences.Editor editor=sp.edit();
+                                    editor.putBoolean("isLogin",true);
                                     editor.putString("phonenumber",user.Get_phonenumber());
                                     editor.putString("password",user.Get_password());
-                                    editor.putString("firstname",user.Get_firstname());
-                                    editor.putString("lastname",user.Get_lastname());
+                                    editor.putString("username",user.Get_firstname());
+                                    editor.commit();
+                                    Log.d("regist_activity", user.Get_phonenumber());
+                                    Log.d("regist_activity", user.Get_password());
+                                    Log.d("regist_activity", user.Get_firstname());
                                     MainActivity.actionStart(regist_activity.this);
                                 }
                                 else{

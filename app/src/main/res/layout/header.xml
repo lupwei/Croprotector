@@ -14,7 +14,6 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="lupengwei"
         android:textColor="#fff"
         android:textSize="14sp"
         android:layout_marginStart="39dp"

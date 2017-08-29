@@ -5,21 +5,27 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.Message;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.support.design.widget.NavigationView;
 
@@ -57,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private help_fragment helpFragment;
     private FragmentManager fManager;
 
+
     //left menu
     private DrawerLayout drawerLayout;
 
@@ -70,11 +77,50 @@ public class MainActivity extends AppCompatActivity {
             Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA,
     };
 
+    //header里的用户名信息
+    private String userinfo;
+    private TextView username;
+
+    //用户文件存储
+    private SharedPreferences sp;
+    private SharedPreferences.Editor editor;
+
+    private static final int UPDATE_TEXT=1;
+    private Handler handler=new Handler(){
+        public void handleMessage(Message msg){
+            switch(msg.what){
+                case UPDATE_TEXT:
+                    username.setText(userinfo);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+        //利用sharedpreferences判断用户是否在已登录的状态下，用户注销就清空userdata，登录就将用户信息写入userdata
+        sp=getSharedPreferences("userdata",MODE_PRIVATE);
+        editor=sp.edit();
+        boolean isLogin=sp.getBoolean("isLogin",false);
+
+        //获取header中username控件
+        username=(TextView)LayoutInflater.from(MainActivity.this).inflate(R.layout.header,null).findViewById(R.id.username);
+        if(isLogin){
+            userinfo=sp.getString("username","用户信息丢失");
+            Log.d("MainActivity", userinfo);
+            Message message=new Message();
+            message.what=UPDATE_TEXT;
+            handler.sendMessageAtTime(message, SystemClock.uptimeMillis());
+        }
+        else{
+            Login_activity.actionStart(MainActivity.this);
+        }
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
@@ -123,6 +169,8 @@ public class MainActivity extends AppCompatActivity {
                         fTransaction.replace(R.id.fragment_container, helpFragment).commit();
                         break;
                     case R.id.logout:
+                        editor.clear();
+                        editor.commit();
                         Login_activity.actionStart(MainActivity.this);
                         break;
                 }

@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -73,11 +74,16 @@ public class Login_activity extends AppCompatActivity{
                                     user.setFirstname(list.get(1));
                                     user.setLastname(list.get(2));
                                     //存储用户信息到userdata文件中
-                                    SharedPreferences.Editor editor=getSharedPreferences("userdata",MODE_PRIVATE).edit();
+                                    SharedPreferences sp=getSharedPreferences("userdata",MODE_PRIVATE);
+                                    SharedPreferences.Editor editor=sp.edit();
+                                    editor.putBoolean("isLogin",true);
                                     editor.putString("phonenumber",user.Get_phonenumber());
                                     editor.putString("password",user.Get_password());
-                                    editor.putString("firstname",user.Get_firstname());
-                                    editor.putString("lastname",user.Get_lastname());
+                                    editor.putString("username",user.Get_firstname());
+                                    editor.commit();
+                                    Log.d("login_activity", user.Get_phonenumber());
+                                    Log.d("login_activity", user.Get_password());
+                                    Log.d("login_activity", user.Get_firstname());
                                     MainActivity.actionStart(Login_activity.this);
                                 }
                                 else{
