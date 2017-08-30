@@ -1,6 +1,8 @@
 package nova.croprotector;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
@@ -27,7 +29,8 @@ public class UAV_fragment extends Fragment implements View.OnClickListener {
     private Button mBtnOpen;
     View view;
 
-    public UAV_fragment(){}
+    public UAV_fragment(){
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,7 +45,17 @@ public class UAV_fragment extends Fragment implements View.OnClickListener {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(UAV_fragment.this.getActivity(), "FAB clicked", Toast.LENGTH_SHORT).show();
+                //help_fragment helpFragment=new help_fragment();
+                /*FragmentManager fm = getFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.fragment_container,helpFragment);
+                ft.addToBackStack(null);
+                ft.commit();*/
+                FragmentManager fManager = getFragmentManager();
+                FragmentTransaction fTransaction = fManager.beginTransaction();
+                help_fragment helpFragment=new help_fragment();
+                fTransaction.replace(R.id.fragment_container,helpFragment).commit();
+                //Toast.makeText(UAV_fragment.this.getActivity(), "FAB clicked", Toast.LENGTH_SHORT).show();
             }
         });
 

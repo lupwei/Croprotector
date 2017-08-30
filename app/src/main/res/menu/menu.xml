@@ -41,13 +41,13 @@
     </group>
 
 
-    <group
+    <!--<group
         android:id="@+id/first_group_2"
         android:checkableBehavior="single">
         <item
             android:id="@+id/help"
             android:icon="@mipmap/ic_help_black_48dp"
             android:title="帮助"/>
-    </group>
+    </group>-->
 
 </menu>
