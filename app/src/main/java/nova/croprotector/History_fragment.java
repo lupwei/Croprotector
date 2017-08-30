@@ -1,46 +1,54 @@
 package nova.croprotector;
 
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class History_fragment extends android.app.Fragment {
 
-    private List<historylist> diseaseList = new ArrayList<>();
+    //private List<historylist> diseaseList = new ArrayList<>();
+
+    private diseaseinfo[] diseases={
+            new diseaseinfo("100,102","2017.7.26",R.drawable.disease_pic1),
+            new diseaseinfo("100,58","2017.7.27",R.drawable.disease_pic1),
+            new diseaseinfo("109,202","2017.8.26",R.drawable.disease_pic1)
+    };
+
+    private List<diseaseinfo> diseaseInfoList =new ArrayList<>();
+    private DiseaseInfoAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_history, container, false);
 
-        for(int i=0;i<5;i++){
-            historylist history_1=new historylist("番茄黄曲叶病毒","3",R.mipmap.arrow_icon);
-            diseaseList.add(history_1);
 
-            historylist history_2=new historylist("番茄花叶病毒","4",R.mipmap.arrow_icon);
-            diseaseList.add(history_2);
+        initDiseases();
+        RecyclerView recyclerView=(RecyclerView)view.findViewById(R.id.recycler_view);
+        GridLayoutManager layoutManager=new GridLayoutManager(this.getActivity(),1);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter=new DiseaseInfoAdapter(diseaseInfoList);
+        recyclerView.setAdapter(adapter);
 
-            historylist history_3=new historylist("番茄曲叶病毒","2",R.mipmap.arrow_icon);
-            diseaseList.add(history_3);
-        }
 
-        historylistAdapter diseaseAdapter=new historylistAdapter(this.getActivity(),R.layout.history_list, diseaseList);
-        ListView listview=(ListView)view.findViewById(R.id.List_view);
-        listview.setAdapter(diseaseAdapter);
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                historylist list= diseaseList.get(position);
-                DiseaseActivity.actionStart(History_fragment.this.getActivity());
-            }
-        });
 
         return view;
+    }
+
+    //测试阶段，随机生成数据
+    private void initDiseases(){
+        diseaseInfoList.clear();
+        for (int i = 0; i <50 ; i++) {
+            Random random=new Random();
+            int index=random.nextInt(diseases.length);
+            diseaseInfoList.add(diseases[index]);
+        }
     }
 
 }

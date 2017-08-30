@@ -51,9 +51,9 @@ public class Login_activity extends AppCompatActivity{
         login_B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phonenumber = username_edit.getText().toString();
+                String phoneNumber = username_edit.getText().toString();
                 String password = password_edit.getText().toString();
-                user.setPhoneNumber(phonenumber);
+                user.setPhoneNumber(phoneNumber);
                 user.setPassword(password);
 
                 String jsonStr=gson.toJson(user);
@@ -67,7 +67,6 @@ public class Login_activity extends AppCompatActivity{
                             @Override
                             public void run() {
                                 List<String> list=new ArrayList<String>();
-                                String loginMsg;
                                 list=res.data;
                                 if(res.code==0){
                                     Toast.makeText(Login_activity.this,list.get(0), Toast.LENGTH_SHORT).show();
@@ -104,6 +103,7 @@ public class Login_activity extends AppCompatActivity{
         regist_B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO
                 regist_activity.actionStart(Login_activity.this);
             }
         });
