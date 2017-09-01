@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/AMap_Location_V3.5.0_20170731" />
             <option value="$PROJECT_DIR$/AMap_Search_V5.3.1_20170817" />
             <option value="$PROJECT_DIR$/Amap_2DMap_V5.2.0_20170627" />
             <option value="$PROJECT_DIR$/Android_Map3D_SDK_V5.3.0_20170815" />

@@ -86,41 +86,13 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
 
     private static final int UPDATE_TEXT=1;
-    private Handler handler=new Handler(){
-        public void handleMessage(Message msg){
-            switch(msg.what){
-                case UPDATE_TEXT:
-                    username.setText(userinfo);
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        //利用sharedpreferences判断用户是否在已登录的状态下，用户注销就清空userdata，登录就将用户信息写入userdata
-        sp=getSharedPreferences("userdata",MODE_PRIVATE);
-        editor=sp.edit();
-        boolean isLogin=sp.getBoolean("isLogin",false);
-
-        //获取header中username控件
-        username=(TextView)LayoutInflater.from(MainActivity.this).inflate(R.layout.header,null).findViewById(R.id.username);
-        if(isLogin){
-            userinfo=sp.getString("username","用户信息丢失");
-            Log.d("MainActivity", userinfo);
-            Message message=new Message();
-            message.what=UPDATE_TEXT;
-            handler.sendMessageAtTime(message, SystemClock.uptimeMillis());
-        }
-        else{
-            Login_activity.actionStart(MainActivity.this);
-        }
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolBar);
@@ -129,7 +101,26 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle actionBarDrawerToggle=new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_string,R.string.close_string);
         actionBarDrawerToggle.syncState();
 
+
+        //利用sharedpreferences判断用户是否在已登录的状态下，用户注销就清空userdata，登录就将用户信息写入userdata
+        sp=getSharedPreferences("userdata",MODE_PRIVATE);
+        editor=sp.edit();
+        boolean isLogin=sp.getBoolean("isLogin",false);
+
+        //设置username
         NavigationView navigationView=(NavigationView)findViewById(R.id.nav_view);
+        View headerLayout = navigationView.getHeaderView(0);
+        if(isLogin){
+            userinfo=sp.getString("username","用户信息丢失");
+            Log.d("MainActivity", userinfo);
+            ((TextView)headerLayout.findViewById(R.id.username)).setText(userinfo);
+        }
+        else{
+            Login_activity.actionStart(MainActivity.this);
+            ((TextView)headerLayout.findViewById(R.id.username)).setText("未登录");
+        }
+
+
         navigationView.setCheckedItem(R.id.home);
         fManager = getFragmentManager();
         FragmentTransaction fTransaction = fManager.beginTransaction();
@@ -164,10 +155,10 @@ public class MainActivity extends AppCompatActivity {
                         passwordFragment = new EditPassword_fragment();
                         fTransaction.replace(R.id.fragment_container, passwordFragment).commit();
                         break;
-                    case R.id.help:
+                    /*case R.id.help:
                         helpFragment = new help_fragment();
                         fTransaction.replace(R.id.fragment_container, helpFragment).commit();
-                        break;
+                        break;*/
                     case R.id.logout:
                         editor.clear();
                         editor.commit();
