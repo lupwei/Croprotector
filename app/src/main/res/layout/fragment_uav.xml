@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation = "vertical"
-    android:layout_width = "match_parent"
-    android:layout_height = "match_parent"
-    android:background = "#ffffff">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
 
 
     <TextView
@@ -12,10 +13,10 @@
         android:layout_height = "wrap_content"
         android:text = "连接您的无人机"
         android:textColor = "@color/black"
-        android:textSize = "25sp"
+        android:textSize = "20sp"
         android:textStyle="normal"
         android:fontFamily="sans-serif-light"
-        android:layout_marginTop = "37dp"
+        android:layout_marginTop = "78dp"
         android:layout_marginLeft = "100dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -23,26 +24,26 @@
     <ImageView
         android:id = "@+id/uav_image"
         android:layout_width = "wrap_content"
-        android:layout_height = "wrap_content"
-        android:src = "@drawable/uav"
+        android:layout_height = "180dp"
+        android:src = "@drawable/mavic_pro"
         android:layout_below="@+id/uav_text"
         android:layout_marginTop="39dp"
         android:layout_marginLeft = "70dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/text_connection_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="连接状态：未检测到设备"
+        android:text="未连接"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:typeface="serif"
         android:layout_below="@+id/uav_image"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="89dp" />
+        android:layout_marginBottom="89dp" />-->
 
     <TextView
         android:id="@+id/text_product_info"
@@ -52,12 +53,37 @@
         android:textColor="@color/black"
         android:textSize="20dp"
         android:typeface="serif"
-        android:layout_below="@+id/text_connection_status"
+        android:layout_below="@+id/uav_image"
         android:layout_marginTop="-40dp"
         android:layout_centerHorizontal="true" />
 
 
-    <Button
+    <!--<android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_connection_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="未连接"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:layout_below="@+id/uav_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="89dp" />-->
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/connect"
+        android:layout_width="230dp"
+        android:layout_height="45dp"
+        android:text="连接"
+        android:layout_marginTop="65dp"
+        android:padding="12dp"
+        android:textColor="@color/white"
+        android:background="@drawable/round_btn"
+        android:layout_below="@+id/uav_image"
+        android:layout_centerHorizontal="true" />
+
+
+    <!--<Button
         android:id="@+id/connect"
         android:layout_width="150dp"
         android:layout_height="55dp"
@@ -69,7 +95,7 @@
         android:layout_below="@+id/text_product_info"
         android:layout_marginBottom="80dp"
         android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true" />-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
