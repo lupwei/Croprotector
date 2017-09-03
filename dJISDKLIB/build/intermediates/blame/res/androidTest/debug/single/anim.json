@@ -12,12 +12,12 @@
         "source": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\anim\\core_push_right_out.xml"
     },
     {
-        "merged": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\core_hyperspace_out.xml",
-        "source": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\anim\\core_hyperspace_out.xml"
-    },
-    {
         "merged": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\core_zoom_exit.xml",
         "source": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\anim\\core_zoom_exit.xml"
+    },
+    {
+        "merged": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\core_hyperspace_out.xml",
+        "source": "C:\\Users\\Jeremy\\AndroidStudioProjects\\Croprotector\\dJISDKLIB\\build\\intermediates\\bundles\\debug\\res\\anim\\core_hyperspace_out.xml"
     },
     {
         "merged": "C:\\Users\\ZTH\\Croprotector\\dJISDKLIB\\build\\intermediates\\res\\merged\\androidTest\\debug\\anim\\core_zoom_exit_back.xml",
