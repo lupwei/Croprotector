@@ -6,7 +6,7 @@
     <string name="login_password_hint">  请输入密码</string>
     <string name="permission">权限(permission)</string>
     <string name="no_permissions">应用需要必要的运行权限</string>
-    <string name="product_information">无人机产品信息</string>
+    <string name="product_information"> </string>
     <string name="connection_loose">连接状态：未检测到设备</string>
     <string name="settings">设置</string>
     <string name="help">帮助</string>

@@ -84,7 +84,7 @@ public class UAV_fragment extends Fragment implements View.OnClickListener {
     }
 
     private void initUI() {
-        mTextConnectionStatus = (TextView) view.findViewById(R.id.text_connection_status);
+        //mTextConnectionStatus = (TextView) view.findViewById(R.id.text_connection_status);
         mTextProduct = (TextView) view.findViewById(R.id.text_product_info);
         mBtnOpen = (Button) view.findViewById(R.id.connect);
         mBtnOpen.setOnClickListener(this);
