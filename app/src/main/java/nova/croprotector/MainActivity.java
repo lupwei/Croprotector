@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences sp;
     private SharedPreferences.Editor editor;
 
-    private static final int UPDATE_TEXT=1;
+
 
 
     @Override

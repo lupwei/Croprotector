@@ -2,6 +2,7 @@ package nova.croprotector;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
@@ -43,13 +44,21 @@ import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
+
+import okhttp3.MediaType;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class Shoot_fragment extends Fragment {
@@ -67,6 +76,17 @@ public class Shoot_fragment extends Fragment {
     CameraCaptureSession mCameraSession;
     CameraCharacteristics mCameraCharacteristics;
     Ringtone ringtone;
+
+    //网络通信数据传输相关
+    private Gson gson=new Gson();
+    private CommonResponse<DiseaseKind> res=new CommonResponse<DiseaseKind>();
+    private static final MediaType JSON=MediaType.parse("application/json;charset=utf-8");
+    private DiseaseInfo diseaseinfo1=new DiseaseInfo();
+
+    //用户信息缓存文件存储
+    private SharedPreferences sp;
+    private SharedPreferences.Editor editor;
+
     //相机会话的监听器，通过他得到mCameraSession对象，这个对象可以用来发送预览和拍照请求
     private CameraCaptureSession.StateCallback mSessionStateCallBack = new CameraCaptureSession
             .StateCallback() {
@@ -121,6 +141,30 @@ public class Shoot_fragment extends Fragment {
         @Override
         public void onImageAvailable(ImageReader imageReader) {
             mHandler.post(new ImageSaver(imageReader.acquireNextImage()));
+
+            //弹出识别结果窗口
+            resultWindow();
+            Log.d(TAG, "窗口已弹出");
+
+            //网络传输接收数据，并存入缓存文件
+            //获取图片
+            Image reader=imageReader.acquireNextImage();
+            //获取当前时间，转成String类型
+            SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date curDate=new Date(System.currentTimeMillis());
+            String sinfoTime=formatter.format(curDate);
+            diseaseinfo1.setInfoTime(sinfoTime);
+
+            //设置diseaseNo，diseaseKind，longitude,latitude，因为此时还未检测，所以全部是默认值
+            diseaseinfo1.setDiseaseNo("未检测");
+            diseaseinfo1.setDiseaseKind(new DiseaseKind());
+            diseaseinfo1.setLongitude(-1.0);
+            diseaseinfo1.setLatitude(-1.0);
+
+            //从用户信息的缓存文件中取出phonenumber
+            sp=getSharedPreferences("userdata",MODE_PRIVATE);
+            editor=sp.edit();
+
             //弹出识别结果窗口
             resultWindow();
             Log.d(TAG, "窗口已弹出");

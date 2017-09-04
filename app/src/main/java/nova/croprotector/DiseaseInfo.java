@@ -9,9 +9,9 @@ import java.util.Date;
 public class DiseaseInfo {
     private String infoNo;                          //手机号加时间
     private String diseaseNo;                     //还未检测出结果时默认为"未检测"
-    private DiseaseKind diseasekind;
+    private DiseaseKind diseaseKind;
     private String picture;                        //Base64格式的字符串
-    private Date infoTime;
+    private String infoTime;
     private double longitude;                      //不存在默认为-1
     private double latitude;                       //不存在默认为-1
     private String phonenumber;
@@ -24,15 +24,15 @@ public class DiseaseInfo {
         this.diseaseNo=diseaseName;
     }
 
-    public void setDiseaseKind(DiseaseKind diseasekind) {
-        this.diseasekind=diseasekind;
+    public void setDiseaseKind(DiseaseKind diseaseKind) {
+        this.diseaseKind=diseaseKind;
     }
 
     public void setPicture(String picture){
         this.picture=picture;
     }
 
-    public void setTime(Date time){
+    public void setInfoTime(String time){
         this.infoTime=time;
     }
 
@@ -57,14 +57,14 @@ public class DiseaseInfo {
     }
 
     public DiseaseKind getDiseaseKind() {
-        return diseasekind;
+        return diseaseKind;
     }
 
     public String getPicture(){
         return picture;
     }
 
-    public Date getInfoTime(){
+    public String getInfoTime(){
         return infoTime;
     }
 
