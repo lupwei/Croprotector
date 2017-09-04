@@ -1,5 +1,7 @@
 package nova.croprotector;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -7,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
@@ -22,6 +25,7 @@ import java.util.Random;
 public class History_fragment extends android.app.Fragment {
 
     //private List<historylist> diseaseList = new ArrayList<>();
+    private int choice=-1;
 
     private diseaseinfo[] diseases={
             new diseaseinfo("100,102","2017.7.26",R.drawable.disease_pic1),
@@ -73,12 +77,16 @@ public class History_fragment extends android.app.Fragment {
         //圆形菜单
         CircleMenu circleMenu = (CircleMenu) view.findViewById(R.id.circle_menu);
 
-        circleMenu.setMainMenu(Color.parseColor("#8BC34A"), R.mipmap.arrow_icon, R.mipmap.album)
-                .addSubMenu(Color.parseColor("#FF4B32"), R.mipmap.avatar)
+        circleMenu.setMainMenu(Color.parseColor("#8BC34A"), R.mipmap.ic_menu_white_48dp, R.mipmap.ic_close_white_48dp)
+                .addSubMenu(Color.parseColor("#258CFF"), R.mipmap.ic_format_list_bulleted_white_48dp)
+                .addSubMenu(Color.parseColor("#258CFF"), R.mipmap.ic_map_white)
                 .setOnMenuSelectedListener(new OnMenuSelectedListener() {
 
+                    //图标点击事件
                     @Override
-                    public void onMenuSelected(int index) {}
+                    public void onMenuSelected(int index) {
+                        choice=index;
+                    }
 
                 }).setOnMenuStatusChangeListener(new OnMenuStatusChangeListener() {
 
@@ -86,7 +94,25 @@ public class History_fragment extends android.app.Fragment {
             public void onMenuOpened() {}
 
             @Override
-            public void onMenuClosed() {}
+            public void onMenuClosed() {
+                if(-1==choice) return;
+                FragmentManager fManager = getFragmentManager();
+                FragmentTransaction fTransaction = fManager.beginTransaction();
+                switch(choice){
+                    //列表图标
+                    case 0:
+                        choice=-1;
+                        History_fragment historyFragment=new History_fragment();
+                        fTransaction.replace(R.id.fragment_container,historyFragment).commit();
+                        break;
+                    //地图图标
+                    case 1:
+                        choice=-1;
+                        HistoryMap_fragment historyMapFragment=new HistoryMap_fragment();
+                        fTransaction.replace(R.id.fragment_container,historyMapFragment).commit();
+                        break;
+                }
+            }
 
         });
 
