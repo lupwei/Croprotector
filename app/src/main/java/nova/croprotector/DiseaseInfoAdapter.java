@@ -19,7 +19,7 @@ import java.util.List;
 
 public class DiseaseInfoAdapter extends RecyclerView.Adapter<DiseaseInfoAdapter.ViewHolder>{
 
-    private List<diseaseinfo> myDiseaseInfoList;
+    public List<diseaseinfo> myDiseaseInfoList;
     private Context mContext;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
