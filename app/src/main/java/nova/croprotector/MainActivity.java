@@ -82,8 +82,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView username;
 
     //用户文件存储
-    private SharedPreferences sp;
-    private SharedPreferences.Editor editor;
+    private SharedPreferences sp1;
+    private SharedPreferences.Editor editor1;
+    private SharedPreferences sp2;
+    private SharedPreferences.Editor editor2;
 
 
 
@@ -103,15 +105,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         //利用sharedpreferences判断用户是否在已登录的状态下，用户注销就清空userdata，登录就将用户信息写入userdata
-        sp=getSharedPreferences("userdata",MODE_PRIVATE);
-        editor=sp.edit();
-        boolean isLogin=sp.getBoolean("isLogin",false);
+        sp2=getSharedPreferences("infodata",MODE_PRIVATE);
+        editor2=sp2.edit();
+        sp1=getSharedPreferences("userdata",MODE_PRIVATE);
+        editor1=sp1.edit();
+        boolean isLogin=sp1.getBoolean("isLogin",false);
 
         //设置username
         NavigationView navigationView=(NavigationView)findViewById(R.id.nav_view);
         View headerLayout = navigationView.getHeaderView(0);
         if(isLogin){
-            userinfo=sp.getString("username","用户信息丢失");
+            userinfo=sp1.getString("username","用户信息丢失");
             Log.d("MainActivity", userinfo);
             ((TextView)headerLayout.findViewById(R.id.username)).setText(userinfo);
         }
@@ -160,8 +164,10 @@ public class MainActivity extends AppCompatActivity {
                         fTransaction.replace(R.id.fragment_container, helpFragment).commit();
                         break;*/
                     case R.id.logout:
-                        editor.clear();
-                        editor.commit();
+                        editor1.clear();
+                        editor1.commit();
+                        editor2.clear();
+                        editor2.commit();
                         Login_activity.actionStart(MainActivity.this);
                         break;
                 }

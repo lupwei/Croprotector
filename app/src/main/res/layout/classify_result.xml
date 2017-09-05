@@ -4,6 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/classify_result_title"
         android:layout_width="wrap_content"
@@ -12,6 +13,7 @@
         android:text="识别结果"
         android:textColor="@color/iron"
         android:textSize="18sp"/>
+
     <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/avi"
         android:layout_width="70dp"
@@ -19,8 +21,30 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/classify_result_title"
         style="@style/AVLoadingIndicatorView"
-        android:visibility="visible"
         app:indicatorName="BallClipRotatePulseIndicator"
         app:indicatorColor="@color/primary_dark"/>
+
+    <TextView
+        android:id="@+id/classify_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/iron"
+        android:textSize="18sp"
+        android:layout_alignBottom="@+id/avi"
+        android:layout_marginBottom="23dp"
+        android:layout_alignStart="@+id/avi" />
+    
+    <TextView
+        android:id="@+id/classify_no_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="没有检测出结果"
+        android:textColor="@color/iron"
+        android:textSize="18sp"
+        android:layout_alignBaseline="@+id/classify_result"
+        android:layout_alignBottom="@+id/classify_result"
+        />
 
 </RelativeLayout>
