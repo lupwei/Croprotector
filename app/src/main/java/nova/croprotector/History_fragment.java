@@ -27,13 +27,13 @@ public class History_fragment extends android.app.Fragment {
     //private List<historylist> diseaseList = new ArrayList<>();
     private int choice=-1;
 
-    private diseaseinfo[] diseases={
-            new diseaseinfo("100,102","2017.7.26",R.drawable.disease_pic1),
-            new diseaseinfo("100,58","2017.7.27",R.drawable.disease_pic1),
-            new diseaseinfo("109,202","2017.8.26",R.drawable.disease_pic1)
+    private DiseaseInfo[] diseases={
+            new DiseaseInfo("100,102","2017.7.26",R.drawable.disease_pic1),
+            new DiseaseInfo("100,58","2017.7.27",R.drawable.disease_pic1),
+            new DiseaseInfo("109,202","2017.8.26",R.drawable.disease_pic1)
     };
 
-    private List<diseaseinfo> diseaseInfoList =new ArrayList<>();
+    private List<DiseaseInfo> diseaseInfoList =new ArrayList<>();
     private DiseaseInfoAdapter adapter;
 
     @Override

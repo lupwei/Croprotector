@@ -2,6 +2,9 @@ package nova.croprotector;
 
 import android.app.Fragment;
 import android.content.Context;
+
+
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
@@ -41,15 +44,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
+
+import okhttp3.Call;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class Shoot_fragment extends Fragment {
@@ -67,6 +80,25 @@ public class Shoot_fragment extends Fragment {
     CameraCaptureSession mCameraSession;
     CameraCharacteristics mCameraCharacteristics;
     Ringtone ringtone;
+
+    //网络通信数据传输相关
+    private Gson gson=new Gson();
+    private CommonResponse<DiseaseKind> res=new CommonResponse<DiseaseKind>();
+    private static final MediaType JSON=MediaType.parse("application/json;charset=utf-8");
+    private DiseaseInfo diseaseinfo1=new DiseaseInfo();
+
+    //用户信息缓存文件存储
+    private SharedPreferences sp;
+    private SharedPreferences.Editor editor;
+
+    //弹窗控件
+    private TextView classify_result=(TextView) LayoutInflater.from(getActivity())
+            .inflate(R.layout.classify_result,null).findViewById(R.id.classify_result);
+    private com.wang.avi.AVLoadingIndicatorView loadingview=(com.wang.avi.AVLoadingIndicatorView)LayoutInflater.from(getActivity())
+            .inflate(R.layout.classify_result,null).findViewById(R.id.avi);
+    private TextView classify_no_result=(TextView) LayoutInflater.from(getActivity())
+            .inflate(R.layout.classify_result,null).findViewById(R.id.classify_no_result);
+
     //相机会话的监听器，通过他得到mCameraSession对象，这个对象可以用来发送预览和拍照请求
     private CameraCaptureSession.StateCallback mSessionStateCallBack = new CameraCaptureSession
             .StateCallback() {
@@ -121,9 +153,100 @@ public class Shoot_fragment extends Fragment {
         @Override
         public void onImageAvailable(ImageReader imageReader) {
             mHandler.post(new ImageSaver(imageReader.acquireNextImage()));
+
             //弹出识别结果窗口
+            classify_result.setVisibility(View.INVISIBLE);
+            classify_no_result.setVisibility(View.INVISIBLE);
+            loadingview.setVisibility(View.VISIBLE);
             resultWindow();
             Log.d(TAG, "窗口已弹出");
+
+            //网络传输接收数据，并存入缓存文件
+            //获取图片
+            Image reader=imageReader.acquireNextImage();
+            ByteBuffer buffer = reader.getPlanes()[0].getBuffer();
+            byte[] buff = new byte[buffer.remaining()];
+            buffer.get(buff);
+            BitmapFactory.Options ontain = new BitmapFactory.Options();
+            ontain.inSampleSize = 50;
+            Bitmap bm = BitmapFactory.decodeByteArray(buff, 0, buff.length, ontain);
+            String base64Str=PictureClass.BitmapToString(bm);
+            diseaseinfo1.setPicture(base64Str);
+
+            //获取当前时间，转成String类型
+            SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date curDate=new Date(System.currentTimeMillis());
+            String sinfoTime=formatter.format(curDate);
+            diseaseinfo1.setInfoTime(sinfoTime);
+
+            //设置diseaseNo，diseaseKind，longitude,latitude，因为此时还未检测，所以全部是默认值
+            diseaseinfo1.setDiseaseNo("未检测");
+            diseaseinfo1.setDiseaseKind(new DiseaseKind());
+            diseaseinfo1.setLongitude(-1.0);
+            diseaseinfo1.setLatitude(-1.0);
+
+            //从用户信息的缓存文件中取出phonenumber
+            sp=getActivity().getSharedPreferences("userdata",Context.MODE_PRIVATE);
+            String phonenumber=sp.getString("phonenumber","检测不到登录信息");
+            diseaseinfo1.setPhonenumber(phonenumber);
+            //设置infoNo
+            String infoNo=phonenumber+sinfoTime;
+            diseaseinfo1.setInfoTime(infoNo);
+
+            //数据获取完毕，开始网络通信部分
+            String jsonStr=gson.toJson(diseaseinfo1);
+            RequestBody requestBody=RequestBody.create(JSON,jsonStr);
+            HttpUtil.sendHttpRequest("http://172.20.10.14:8080/Croprotector/TestPictureServlet",requestBody,new okhttp3.Callback(){
+                @Override
+                public void onResponse(Call call, Response response) throws IOException{
+                    String responseData = response.body().string();
+                    res=GsonToBean.fromJsonObject(responseData,DiseaseKind.class);
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(res.code==0){
+
+                                //接收返回的data
+                                DiseaseKind diseaseKind=res.data;
+                                diseaseinfo1.setDiseaseKind(diseaseKind);
+                                diseaseinfo1.setDiseaseNo(diseaseKind.getDiseaseNo());
+
+                                //将记录存储进缓存文件
+                                String jsonStr1=gson.toJson(diseaseinfo1);
+                                sp=getActivity().getSharedPreferences("infodata",Context.MODE_PRIVATE);
+                                editor=sp.edit();
+                                editor.putString(diseaseinfo1.getInfoNo(),jsonStr1);
+                                editor.putBoolean("isEmpty",false);
+                                editor.commit();
+                                Log.d(TAG, "缓存文件已存储");
+
+                                //弹出识别结果窗口
+                                classify_result.setText("检测结果为："+diseaseKind.getDiseaseName());
+                                classify_result.setVisibility(View.VISIBLE);
+                                classify_no_result.setVisibility(View.INVISIBLE);
+                                loadingview.setVisibility(View.INVISIBLE);
+                                resultWindow();
+                                Log.d(TAG, "窗口已弹出");
+
+                            }
+                            else{
+                                classify_result.setVisibility(View.INVISIBLE);
+                                classify_no_result.setVisibility(View.VISIBLE);
+                                loadingview.setVisibility(View.INVISIBLE);
+                                //弹出识别结果窗口
+                                resultWindow();
+                                Log.d(TAG, "窗口已弹出");
+                            }
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailure(Call call,IOException e){
+                    //异常处理
+                }
+            });
+
         }
     };
 

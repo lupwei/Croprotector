@@ -19,7 +19,7 @@ import java.util.List;
 
 public class DiseaseInfoAdapter extends RecyclerView.Adapter<DiseaseInfoAdapter.ViewHolder>{
 
-    public List<diseaseinfo> myDiseaseInfoList;
+    private List<DiseaseInfo> myDiseaseInfoList;
     private Context mContext;
 
     static class ViewHolder extends RecyclerView.ViewHolder{
@@ -38,7 +38,7 @@ public class DiseaseInfoAdapter extends RecyclerView.Adapter<DiseaseInfoAdapter.
     }
 
 
-    public DiseaseInfoAdapter(List<diseaseinfo> diseaseInfoList){
+    public DiseaseInfoAdapter(List<DiseaseInfo> diseaseInfoList){
         myDiseaseInfoList = diseaseInfoList;
     }
 
@@ -53,7 +53,7 @@ public class DiseaseInfoAdapter extends RecyclerView.Adapter<DiseaseInfoAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder,int position){
-        diseaseinfo disease= myDiseaseInfoList.get(position);
+        DiseaseInfo disease= myDiseaseInfoList.get(position);
         holder.time.setText(disease.getTime());
         holder.location.setText(disease.getLocation());
         Glide.with(mContext).load(disease.getImageId()).into(holder.disease_pic);
