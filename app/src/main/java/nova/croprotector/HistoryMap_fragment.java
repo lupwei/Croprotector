@@ -34,6 +34,7 @@ public class HistoryMap_fragment extends android.app.Fragment implements Compoun
 
     private int choice=0;
 
+	private View view;
 
     public static Map_fragment newInstance() {
         Map_fragment fragment = new Map_fragment();
@@ -52,8 +53,15 @@ public class HistoryMap_fragment extends android.app.Fragment implements Compoun
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_history_map, container, false);
-        initview(savedInstanceState,view);
+        view = inflater.inflate(R.layout.fragment_history_map, container, false);
+        return view;
+    }
+
+	
+	@Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+    super.onActivityCreated(savedInstanceState);
+	initview(savedInstanceState,view);
 
         //圆形菜单
         CircleMenu circleMenu = (CircleMenu) view.findViewById(R.id.circle_menu);
@@ -97,9 +105,9 @@ public class HistoryMap_fragment extends android.app.Fragment implements Compoun
 
         });
 
-        return view;
     }
-
+	
+	
     private void initview( Bundle savedInstanceState,View view){
         mapView= (MapView) view.findViewById(R.id.map_history);
         mapView.onCreate(savedInstanceState);

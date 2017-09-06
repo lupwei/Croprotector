@@ -26,6 +26,8 @@ public class History_fragment extends android.app.Fragment {
 
     //private List<historylist> diseaseList = new ArrayList<>();
     private int choice=-1;
+	
+	private View view;
 
     private DiseaseInfo[] diseases={
             new DiseaseInfo("100,102","2017.7.26",R.drawable.disease_pic1),
@@ -38,10 +40,15 @@ public class History_fragment extends android.app.Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_history, container, false);
+        view = inflater.inflate(R.layout.fragment_history, container, false);
+        return view;
+    }
 
-
-        initDiseases();
+	
+	@Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		initDiseases();
         SwipeMenuRecyclerView recyclerView=(SwipeMenuRecyclerView)view.findViewById(R.id.recycler_view);
         GridLayoutManager layoutManager=new GridLayoutManager(this.getActivity(),1);
         recyclerView.setLayoutManager(layoutManager);
@@ -116,9 +123,9 @@ public class History_fragment extends android.app.Fragment {
 
         });
 
-        return view;
-    }
 
+    }
+	
     //测试阶段，随机生成数据
     private void initDiseases(){
         diseaseInfoList.clear();
