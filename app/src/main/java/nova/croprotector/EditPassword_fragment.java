@@ -24,6 +24,8 @@ public class EditPassword_fragment extends Fragment implements View.OnClickListe
     private EditText newPassword_input;
     private EditText newPassword_confirm;
     private Button button_submit;
+	
+	private View view;
 
     //与服务器通信相关
     private CommonResponse<List<String>> res=new CommonResponse<List<String>>();
@@ -37,15 +39,22 @@ public class EditPassword_fragment extends Fragment implements View.OnClickListe
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_password,container,false);
-        oldPassword_input=(EditText)view.findViewById(R.id.oldPassword_input);
+        view = inflater.inflate(R.layout.fragment_edit_password,container,false);
+        return view;
+    }
+
+	
+	@Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		oldPassword_input=(EditText)view.findViewById(R.id.oldPassword_input);
         newPassword_input=(EditText)view.findViewById(R.id.newPassword_input);
         newPassword_confirm=(EditText)view.findViewById(R.id.newPassword_confirm);
         button_submit=(Button)view.findViewById(R.id.button_submit);
         button_submit.setOnClickListener(this);
-        return view;
     }
-
+	
+	
     @Override
     public void onClick(View v){
         //获取修改密码所需的全部变量

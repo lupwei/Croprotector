@@ -70,6 +70,7 @@ public class Shoot_fragment extends Fragment {
     private static final int SETIMAGE = 1;
     private static final int MOVE_FOCK = 2;
 
+
     TextureView mTextureView;
     ImageView mThumbnail;
     Button mButton;
@@ -477,6 +478,15 @@ public class Shoot_fragment extends Fragment {
         mTextureView.setOnTouchListener(textTureOntuchListener);
         return v;
     }
+	
+	
+	@Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		
+    }
+	
+	
 
     @Override
     public void onDestroyView() {
