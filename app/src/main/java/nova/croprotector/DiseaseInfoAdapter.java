@@ -57,7 +57,7 @@ public class DiseaseInfoAdapter extends RecyclerView.Adapter<DiseaseInfoAdapter.
         holder.time.setText(disease.getTime());
         holder.location.setText(disease.getLocation());
         Glide.with(mContext).load(disease.getImageId()).into(holder.disease_pic);
-        //holder.disease_pic.setImageResource(disease.getImageId());
+
     }
 
     @Override

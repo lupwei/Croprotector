@@ -48,12 +48,15 @@ public class EditPassword_fragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onClick(View v){
+
         //获取修改密码所需的全部变量
         String oldPassword=oldPassword_input.getText().toString();
         String newPassword=newPassword_input.getText().toString();
         String confirmPassword=newPassword_confirm.getText().toString();
         String phonenumber=sp.getString("phonenumber","用户信息文件受损，请重新登录");
         String userPassword=sp.getString("password","用户信息文件受损，请重新登录");
+
+        //修改密码的业务逻辑
 
     }
 }
