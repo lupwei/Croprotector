@@ -1,8 +1,6 @@
 package nova.croprotector;
 
-/**
- * Created by WT on 2017/7/28.
- */
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
