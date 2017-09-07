@@ -94,7 +94,7 @@ public class Shoot_fragment extends Fragment {
     private SharedPreferences.Editor editor;
 
     //弹窗控件
-    private TextView classify_result;
+    private TextView classify_result_text;
     private com.wang.avi.AVLoadingIndicatorView loadingview;
     private TextView classify_no_result;
 
@@ -151,15 +151,16 @@ public class Shoot_fragment extends Fragment {
             .OnImageAvailableListener() {
         @Override
         public void onImageAvailable(ImageReader imageReader) {
-            mHandler.post(new ImageSaver(imageReader.acquireNextImage()));
+            Image reader=imageReader.acquireNextImage();
+            mHandler.post(new ImageSaver(reader));
 
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_shoot, null);
-            classify_result=(TextView)view.findViewById(R.id.classify_result);
+            View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result, null);
+            classify_result_text=(TextView)view.findViewById(R.id.classify_result_text);
             classify_no_result=(TextView)view.findViewById(R.id.classify_no_result);
             loadingview=(com.wang.avi.AVLoadingIndicatorView)view.findViewById(R.id.avi);
 
             //弹出识别结果窗口
-            classify_result.setVisibility(View.INVISIBLE);
+            classify_result_text.setVisibility(View.INVISIBLE);
             classify_no_result.setVisibility(View.INVISIBLE);
             loadingview.setVisibility(View.VISIBLE);
             resultWindow();
@@ -167,7 +168,7 @@ public class Shoot_fragment extends Fragment {
 
             //网络传输接收数据，并存入缓存文件
             //获取图片
-            Image reader=imageReader.acquireNextImage();
+            //Image reader=imageReader.acquireNextImage();
             ByteBuffer buffer = reader.getPlanes()[0].getBuffer();
             byte[] buff = new byte[buffer.remaining()];
             buffer.get(buff);
@@ -226,8 +227,8 @@ public class Shoot_fragment extends Fragment {
                                 Log.d(TAG, "缓存文件已存储");
 
                                 //弹出识别结果窗口
-                                classify_result.setText("检测结果为："+diseaseKind.getDiseaseName());
-                                classify_result.setVisibility(View.VISIBLE);
+                                classify_result_text.setText("检测结果为："+diseaseKind.getDiseaseName());
+                                classify_result_text.setVisibility(View.VISIBLE);
                                 classify_no_result.setVisibility(View.INVISIBLE);
                                 loadingview.setVisibility(View.INVISIBLE);
                                 resultWindow();
@@ -235,7 +236,7 @@ public class Shoot_fragment extends Fragment {
 
                             }
                             else{
-                                classify_result.setVisibility(View.INVISIBLE);
+                                classify_result_text.setVisibility(View.INVISIBLE);
                                 classify_no_result.setVisibility(View.VISIBLE);
                                 loadingview.setVisibility(View.INVISIBLE);
                                 //弹出识别结果窗口
