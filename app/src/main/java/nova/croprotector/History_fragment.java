@@ -2,6 +2,8 @@ package nova.croprotector;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,32 +13,52 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.yanzhenjie.recyclerview.swipe.touch.OnItemMoveListener;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+
+import okhttp3.Call;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class History_fragment extends android.app.Fragment {
 
-    //private List<historylist> diseaseList = new ArrayList<>();
     private int choice=-1;
-	
 	private View view;
 
-    private DiseaseInfo[] diseases={
-            new DiseaseInfo("100,102","2017.7.26",R.drawable.disease_pic1),
-            new DiseaseInfo("100,58","2017.7.27",R.drawable.disease_pic1),
-            new DiseaseInfo("109,202","2017.8.26",R.drawable.disease_pic1)
-    };
+    private Gson gson=new Gson();
+    private static final MediaType JSON=MediaType.parse("application/json;charset=utf-8");
+    CommonResponse<List<DiseaseInfo>> res=new CommonResponse<List<DiseaseInfo>>();
 
-    private List<DiseaseInfo> diseaseInfoList =new ArrayList<>();
+    String infoJsonStr;
+    DiseaseInfo diseaseinfo;
+    String infoNo;
+    private List<DiseaseInfo> diseaseInfoList =new ArrayList<DiseaseInfo>();
     private DiseaseInfoAdapter adapter;
+
+    //疾病信息缓存
+    private SharedPreferences sp1;
+    private SharedPreferences.Editor editor1;
+
+    //用户信息缓存
+    private SharedPreferences sp2;
+    private SharedPreferences.Editor editor2;
+
+    SwipeMenuRecyclerView recyclerView=(SwipeMenuRecyclerView)view.findViewById(R.id.recycler_view);
+    GridLayoutManager layoutManager=new GridLayoutManager(getActivity(),1);
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -48,12 +70,68 @@ public class History_fragment extends android.app.Fragment {
 	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		initDiseases();
-        SwipeMenuRecyclerView recyclerView=(SwipeMenuRecyclerView)view.findViewById(R.id.recycler_view);
-        GridLayoutManager layoutManager=new GridLayoutManager(this.getActivity(),1);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter=new DiseaseInfoAdapter(diseaseInfoList);
-        recyclerView.setAdapter(adapter);
+
+        //获取要显示的DiseaseInfo的数据
+        //先检查本地的缓存文件，如果为空再从服务器获取数据
+
+        //检查本地的缓存文件
+        sp1=getActivity().getSharedPreferences("infodata", Context.MODE_PRIVATE);
+        Boolean isEmpty=sp1.getBoolean("isEmpty",true);
+        if(isEmpty){
+            //本地缓存文件为空，从服务器获取数据,然后再存入缓存文件
+            //取出用户手机号
+            sp2=getActivity().getSharedPreferences("userdata",Context.MODE_PRIVATE);
+            String phonenumber=sp2.getString("phonenumber","用户信息文件受损，请重新登录");
+
+            String jsonStr=gson.toJson(phonenumber);
+            RequestBody requestBody=RequestBody.create(JSON,jsonStr);
+            HttpUtil.sendHttpRequest("http://172.20.10.14:8080/Croprotector/HistoryServlet",requestBody,new okhttp3.Callback(){
+                @Override
+                public void onResponse(Call call, Response response) throws IOException{
+                    String responseData = response.body().string();
+                    res=GsonToBean.fromJsonArray(responseData,DiseaseInfo.class);
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            diseaseInfoList=res.data;
+                            recyclerView.setLayoutManager(layoutManager);
+                            adapter=new DiseaseInfoAdapter(diseaseInfoList);
+                            recyclerView.setAdapter(adapter);
+                            //存入缓存
+                            editor1.putBoolean("isEmpty",false);
+                            for(int i=0;i<diseaseInfoList.size();i++){
+                                diseaseinfo=diseaseInfoList.get(i);
+                                infoNo=diseaseinfo.getInfoNo();
+                                infoJsonStr=gson.toJson(diseaseinfo);
+                                editor1.putString(infoNo,infoJsonStr);
+                            }
+                            editor1.commit();
+                        }
+                    });
+                }
+                @Override
+                public void onFailure(Call call,IOException e){
+                    //异常处理
+                }
+            });
+        }
+        else{
+            //本地缓存文件不为空，直接从本地获取数据
+            Map<String,?> infoMap;
+            infoMap=sp1.getAll();
+            for(Map.Entry<String,?> entry:infoMap.entrySet()){
+                infoJsonStr=entry.getValue().toString();
+                if(infoJsonStr=="false"){
+                    continue;
+                }
+                else{
+                    diseaseinfo=gson.fromJson(infoJsonStr,DiseaseInfo.class);
+                    diseaseInfoList.add(diseaseinfo);
+                }
+            }
+        }
+
+
 
 
         recyclerView.setItemViewSwipeEnabled(true); // 开启滑动删除。
@@ -126,14 +204,6 @@ public class History_fragment extends android.app.Fragment {
 
     }
 	
-    //测试阶段，随机生成数据
-    private void initDiseases(){
-        diseaseInfoList.clear();
-        for (int i = 0; i <50 ; i++) {
-            Random random=new Random();
-            int index=random.nextInt(diseases.length);
-            diseaseInfoList.add(diseases[index]);
-        }
-    }
+
 
 }

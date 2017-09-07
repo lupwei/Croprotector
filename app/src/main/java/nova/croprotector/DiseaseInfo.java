@@ -10,7 +10,7 @@ public class DiseaseInfo {
     private String infoNo;                          //手机号加时间
     private String diseaseNo;                     //还未检测出结果时默认为"未检测"
     private DiseaseKind diseaseKind;
-    private String picture;                        //Base64格式的字符串
+    private String picture;                        //Base64格式的字符串，
     private String infoTime;
     private double longitude;                      //不存在默认为-1
     private double latitude;                       //不存在默认为-1

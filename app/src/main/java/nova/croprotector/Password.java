@@ -14,7 +14,7 @@ public class Password {
         this.new_password=new_password;
     }
 
-    public void setConfirmPassword(String phonenumber) {
+    public void setPhonenumber(String phonenumber) {
         this.phonenumber=phonenumber;
     }
 

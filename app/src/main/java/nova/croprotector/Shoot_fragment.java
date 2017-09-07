@@ -82,6 +82,7 @@ public class Shoot_fragment extends Fragment {
     CameraCharacteristics mCameraCharacteristics;
     Ringtone ringtone;
 
+
     //网络通信数据传输相关
     private Gson gson=new Gson();
     private CommonResponse<DiseaseKind> res=new CommonResponse<DiseaseKind>();
@@ -93,12 +94,9 @@ public class Shoot_fragment extends Fragment {
     private SharedPreferences.Editor editor;
 
     //弹窗控件
-    private TextView classify_result=(TextView) LayoutInflater.from(getActivity())
-            .inflate(R.layout.classify_result,null).findViewById(R.id.classify_result);
-    private com.wang.avi.AVLoadingIndicatorView loadingview=(com.wang.avi.AVLoadingIndicatorView)LayoutInflater.from(getActivity())
-            .inflate(R.layout.classify_result,null).findViewById(R.id.avi);
-    private TextView classify_no_result=(TextView) LayoutInflater.from(getActivity())
-            .inflate(R.layout.classify_result,null).findViewById(R.id.classify_no_result);
+    private TextView classify_result;
+    private com.wang.avi.AVLoadingIndicatorView loadingview;
+    private TextView classify_no_result;
 
     //相机会话的监听器，通过他得到mCameraSession对象，这个对象可以用来发送预览和拍照请求
     private CameraCaptureSession.StateCallback mSessionStateCallBack = new CameraCaptureSession
@@ -154,6 +152,11 @@ public class Shoot_fragment extends Fragment {
         @Override
         public void onImageAvailable(ImageReader imageReader) {
             mHandler.post(new ImageSaver(imageReader.acquireNextImage()));
+
+            View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_shoot, null);
+            classify_result=(TextView)view.findViewById(R.id.classify_result);
+            classify_no_result=(TextView)view.findViewById(R.id.classify_no_result);
+            loadingview=(com.wang.avi.AVLoadingIndicatorView)view.findViewById(R.id.avi);
 
             //弹出识别结果窗口
             classify_result.setVisibility(View.INVISIBLE);
@@ -212,12 +215,13 @@ public class Shoot_fragment extends Fragment {
                                 diseaseinfo1.setDiseaseKind(diseaseKind);
                                 diseaseinfo1.setDiseaseNo(diseaseKind.getDiseaseNo());
 
+
                                 //将记录存储进缓存文件
                                 String jsonStr1=gson.toJson(diseaseinfo1);
                                 sp=getActivity().getSharedPreferences("infodata",Context.MODE_PRIVATE);
                                 editor=sp.edit();
                                 editor.putString(diseaseinfo1.getInfoNo(),jsonStr1);
-                                editor.putBoolean("isEmpty",false);
+                                editor.putBoolean("isEmpty",false);                     //false证明文件不为空
                                 editor.commit();
                                 Log.d(TAG, "缓存文件已存储");
 
@@ -527,8 +531,7 @@ public class Shoot_fragment extends Fragment {
         @Override
         public void run() {
             Log.d(TAG, "正在保存图片");
-            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
-                    .getAbsoluteFile();
+            File dir= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsoluteFile();
             if (!dir.exists()) {
                 dir.mkdirs();
             }
