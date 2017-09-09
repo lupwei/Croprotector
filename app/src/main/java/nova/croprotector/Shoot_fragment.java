@@ -163,7 +163,7 @@ public class Shoot_fragment extends Fragment {
 
             mHandler.post(new ImageSaver(bm,buff));
 
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result, null);
+            final View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result, null);
             classify_result_title=(TextView)view.findViewById(R.id.classify_result_title);
             classify_result_text=(TextView)view.findViewById(R.id.classify_result_text);
             classify_no_result=(TextView)view.findViewById(R.id.classify_no_result);
@@ -174,7 +174,7 @@ public class Shoot_fragment extends Fragment {
             classify_result_text.setVisibility(View.INVISIBLE);
             classify_no_result.setVisibility(View.INVISIBLE);
             loadingview.setVisibility(View.VISIBLE);
-            resultWindow();
+            resultWindow(view);
             Log.d(TAG, "窗口已弹出");
 
             //网络传输接收数据，并存入缓存文件
@@ -235,7 +235,7 @@ public class Shoot_fragment extends Fragment {
                                 classify_result_text.setVisibility(View.VISIBLE);
                                 classify_no_result.setVisibility(View.INVISIBLE);
                                 loadingview.setVisibility(View.INVISIBLE);
-                                resultWindow();
+                                resultWindow(view);
                                 Log.d(TAG, "窗口已弹出");
 
                             }
@@ -245,7 +245,7 @@ public class Shoot_fragment extends Fragment {
                                 classify_no_result.setVisibility(View.VISIBLE);
                                 loadingview.setVisibility(View.INVISIBLE);
                                 //弹出识别结果窗口
-                                resultWindow();
+                                resultWindow(view);
                                 Log.d(TAG, "窗口已弹出");
                             }
                         }
@@ -598,8 +598,8 @@ public class Shoot_fragment extends Fragment {
 
 
     //识别后弹出结果窗口
-    private void resultWindow(){
-        View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result, null);
+    private void resultWindow(View view){
+        //View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result, null);
         //1.构造一个PopupWindow，参数依次是加载的View，宽高
         final PopupWindow popWindow = new PopupWindow(view,
                 400, ViewGroup.LayoutParams.WRAP_CONTENT);
