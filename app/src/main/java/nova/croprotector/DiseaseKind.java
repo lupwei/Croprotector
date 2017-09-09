@@ -9,6 +9,11 @@ public class DiseaseKind {
     private String diseaseNo;
     private String diseaseName;
 
+    public DiseaseKind(){
+        diseaseNo="未检测";
+        diseaseName="未检测";
+    }
+
     public void setDiseaseNo(String diseaseNo){
         this.diseaseNo=diseaseNo;
     }

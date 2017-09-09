@@ -79,6 +79,7 @@ public class History_fragment extends android.app.Fragment {
 
         //检查本地的缓存文件
         sp1=getActivity().getSharedPreferences("infodata", Context.MODE_PRIVATE);
+        editor1=sp1.edit();
         Boolean isEmpty=sp1.getBoolean("isEmpty",true);
         if(isEmpty){
             //本地缓存文件为空，从服务器获取数据,然后再存入缓存文件

@@ -39,12 +39,11 @@
         android:id="@+id/classify_no_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:text="没有检测出结果"
         android:textColor="@color/iron"
         android:textSize="18sp"
-        android:layout_alignBaseline="@+id/classify_result"
-        android:layout_alignBottom="@+id/classify_result"
-        />
+        android:layout_alignBaseline="@+id/classify_result_text"
+        android:layout_alignBottom="@+id/classify_result_text"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

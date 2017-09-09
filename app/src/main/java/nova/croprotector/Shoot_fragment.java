@@ -98,6 +98,7 @@ public class Shoot_fragment extends Fragment {
     private TextView classify_result_text;
     private com.wang.avi.AVLoadingIndicatorView loadingview;
     private TextView classify_no_result;
+    private TextView classify_result_title;
 
     //相机会话的监听器，通过他得到mCameraSession对象，这个对象可以用来发送预览和拍照请求
     private CameraCaptureSession.StateCallback mSessionStateCallBack = new CameraCaptureSession
@@ -163,11 +164,13 @@ public class Shoot_fragment extends Fragment {
             mHandler.post(new ImageSaver(bm,buff));
 
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result, null);
+            classify_result_title=(TextView)view.findViewById(R.id.classify_result_title);
             classify_result_text=(TextView)view.findViewById(R.id.classify_result_text);
             classify_no_result=(TextView)view.findViewById(R.id.classify_no_result);
             loadingview=(com.wang.avi.AVLoadingIndicatorView)view.findViewById(R.id.avi);
 
             //弹出识别结果窗口
+            classify_result_title.setVisibility(View.VISIBLE);
             classify_result_text.setVisibility(View.INVISIBLE);
             classify_no_result.setVisibility(View.INVISIBLE);
             loadingview.setVisibility(View.VISIBLE);
@@ -196,7 +199,7 @@ public class Shoot_fragment extends Fragment {
             diseaseinfo1.setPhonenumber(phonenumber);
             //设置infoNo
             String infoNo=phonenumber+sinfoTime;
-            diseaseinfo1.setInfoTime(infoNo);
+            diseaseinfo1.setInfoNo(infoNo);
 
             //数据获取完毕，开始网络通信部分
             String jsonStr=gson.toJson(diseaseinfo1);
@@ -227,6 +230,7 @@ public class Shoot_fragment extends Fragment {
                                 Log.d(TAG, "缓存文件已存储");
 
                                 //弹出识别结果窗口
+                                classify_result_title.setVisibility(View.VISIBLE);
                                 classify_result_text.setText("检测结果为："+diseaseKind.getDiseaseName());
                                 classify_result_text.setVisibility(View.VISIBLE);
                                 classify_no_result.setVisibility(View.INVISIBLE);
@@ -236,6 +240,7 @@ public class Shoot_fragment extends Fragment {
 
                             }
                             else{
+                                classify_result_title.setVisibility(View.VISIBLE);
                                 classify_result_text.setVisibility(View.INVISIBLE);
                                 classify_no_result.setVisibility(View.VISIBLE);
                                 loadingview.setVisibility(View.INVISIBLE);
