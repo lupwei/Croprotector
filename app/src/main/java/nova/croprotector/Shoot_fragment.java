@@ -230,8 +230,8 @@ public class Shoot_fragment extends Fragment {
                                 Log.d(TAG, "缓存文件已存储");
 
                                 //弹出识别结果窗口
-                                classify_result_title.setVisibility(View.VISIBLE);
                                 classify_result_text.setText("检测结果为："+diseaseKind.getDiseaseName());
+                                classify_result_title.setVisibility(View.VISIBLE);
                                 classify_result_text.setVisibility(View.VISIBLE);
                                 classify_no_result.setVisibility(View.INVISIBLE);
                                 loadingview.setVisibility(View.INVISIBLE);
