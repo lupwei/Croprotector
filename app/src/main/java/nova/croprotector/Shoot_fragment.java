@@ -165,15 +165,11 @@ public class Shoot_fragment extends Fragment {
 
             final View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result, null);
             classify_result_title=(TextView)view.findViewById(R.id.classify_result_title);
-            classify_result_text=(TextView)view.findViewById(R.id.classify_result_text);
-            classify_no_result=(TextView)view.findViewById(R.id.classify_no_result);
+            //classify_result_text=(TextView)view.findViewById(R.id.classify_result_text);
+            //classify_no_result=(TextView)view.findViewById(R.id.classify_no_result);
             loadingview=(com.wang.avi.AVLoadingIndicatorView)view.findViewById(R.id.avi);
 
             //弹出识别结果窗口
-            classify_result_title.setVisibility(View.VISIBLE);
-            classify_result_text.setVisibility(View.INVISIBLE);
-            classify_no_result.setVisibility(View.INVISIBLE);
-            loadingview.setVisibility(View.VISIBLE);
             resultWindow(view);
             Log.d(TAG, "窗口已弹出");
 
@@ -212,6 +208,7 @@ public class Shoot_fragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            final View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result_1, null);
                             if(res.code==0){
 
                                 //接收返回的data
@@ -230,22 +227,22 @@ public class Shoot_fragment extends Fragment {
                                 Log.d(TAG, "缓存文件已存储");
 
                                 //弹出识别结果窗口
-                                classify_result_text.setText("检测结果为："+diseaseKind.getDiseaseName());
-                                classify_result_title.setVisibility(View.VISIBLE);
-                                classify_result_text.setVisibility(View.VISIBLE);
-                                classify_no_result.setVisibility(View.INVISIBLE);
-                                loadingview.setVisibility(View.INVISIBLE);
-                                resultWindow(view);
+                                //classify_result_text.setText("检测结果为："+diseaseKind.getDiseaseName());
+                                //classify_result_title.setVisibility(View.VISIBLE);
+                                //classify_result_text.setVisibility(View.VISIBLE);
+                                //classify_no_result.setVisibility(View.INVISIBLE);
+                                //loadingview.setVisibility(View.INVISIBLE);
+                                resultWindow_1(view,diseaseKind.getDiseaseName());
                                 Log.d(TAG, "窗口已弹出");
 
                             }
                             else{
-                                classify_result_title.setVisibility(View.VISIBLE);
-                                classify_result_text.setVisibility(View.INVISIBLE);
-                                classify_no_result.setVisibility(View.VISIBLE);
-                                loadingview.setVisibility(View.INVISIBLE);
+                                //classify_result_title.setVisibility(View.VISIBLE);
+                                //classify_result_text.setVisibility(View.INVISIBLE);
+                                //classify_no_result.setVisibility(View.VISIBLE);
+                                //loadingview.setVisibility(View.INVISIBLE);
                                 //弹出识别结果窗口
-                                resultWindow(view);
+                                resultWindow_1(view,"健康");
                                 Log.d(TAG, "窗口已弹出");
                             }
                         }
@@ -603,6 +600,34 @@ public class Shoot_fragment extends Fragment {
         //1.构造一个PopupWindow，参数依次是加载的View，宽高
         final PopupWindow popWindow = new PopupWindow(view,
                 400, ViewGroup.LayoutParams.WRAP_CONTENT);
+        //final PopupWindow popWindow = new PopupWindow(this.getActivity());
+        //popWindow.setAnimationStyle(R.anim.anim_pop);  //设置加载动画
+
+        //这些为了点击非PopupWindow区域，PopupWindow会消失的，如果没有下面的
+        //代码的话，你会发现，当你把PopupWindow显示出来了，无论你按多少次后退键
+        //PopupWindow并不会关闭，而且退不出程序，加上下述代码可以解决这个问题
+        popWindow.setOutsideTouchable(true);
+        popWindow.setTouchable(true);
+        popWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+                // 这里如果返回true的话，touch事件将被拦截
+                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
+            }
+        });
+        popWindow.setBackgroundDrawable(new ColorDrawable(0x11111111));    //要为popWindow设置一个背景才有效
+        //设置popupWindow显示的位置
+        popWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+    }
+
+    private void resultWindow_1(View view,String text){
+        //View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result, null);
+        //1.构造一个PopupWindow，参数依次是加载的View，宽高
+        final PopupWindow popWindow = new PopupWindow(view,
+                400, ViewGroup.LayoutParams.WRAP_CONTENT);
+        TextView result=(TextView)view.findViewById(R.id.classify_result_text);
+        result.setText(text);
         //final PopupWindow popWindow = new PopupWindow(this.getActivity());
         //popWindow.setAnimationStyle(R.anim.anim_pop);  //设置加载动画
 

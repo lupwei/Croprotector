@@ -14,15 +14,17 @@
         android:textColor="@color/iron"
         android:textSize="18sp"/>
 
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/avi"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+
+    <TextView
+        android:id="@+id/classify_result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/classify_result_title"
-        style="@style/AVLoadingIndicatorView"
-        app:indicatorName="BallClipRotatePulseIndicator"
-        app:indicatorColor="@color/primary_dark"/>
+        android:textColor="@color/iron"
+        android:textSize="18sp"
+        android:layout_alignBottom="@+id/avi"
+        android:layout_marginBottom="23dp"
+        android:layout_alignStart="@+id/avi" />
 
 
 </RelativeLayout>
