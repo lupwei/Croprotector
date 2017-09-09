@@ -70,7 +70,6 @@ public class Shoot_fragment extends Fragment {
     private static final int SETIMAGE = 1;
     private static final int MOVE_FOCK = 2;
 
-
     TextureView mTextureView;
     ImageView mThumbnail;
     Button mButton;
@@ -81,6 +80,8 @@ public class Shoot_fragment extends Fragment {
     CameraCaptureSession mCameraSession;
     CameraCharacteristics mCameraCharacteristics;
     Ringtone ringtone;
+
+    ByteBuffer mBuffer=null;
 
 
     //网络通信数据传输相关
@@ -152,7 +153,14 @@ public class Shoot_fragment extends Fragment {
         @Override
         public void onImageAvailable(ImageReader imageReader) {
             Image reader=imageReader.acquireNextImage();
-            mHandler.post(new ImageSaver(reader));
+            ByteBuffer Buffer = reader.getPlanes()[0].getBuffer();
+            byte[] buff = new byte[Buffer.remaining()];
+            Buffer.get(buff);
+            BitmapFactory.Options ontain = new BitmapFactory.Options();
+            ontain.inSampleSize = 50;
+            Bitmap bm = BitmapFactory.decodeByteArray(buff, 0, buff.length, ontain);
+
+            mHandler.post(new ImageSaver(bm,buff));
 
             View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result, null);
             classify_result_text=(TextView)view.findViewById(R.id.classify_result_text);
@@ -167,14 +175,6 @@ public class Shoot_fragment extends Fragment {
             Log.d(TAG, "窗口已弹出");
 
             //网络传输接收数据，并存入缓存文件
-            //获取图片
-            //Image reader=imageReader.acquireNextImage();
-            ByteBuffer buffer = reader.getPlanes()[0].getBuffer();
-            byte[] buff = new byte[buffer.remaining()];
-            buffer.get(buff);
-            BitmapFactory.Options ontain = new BitmapFactory.Options();
-            ontain.inSampleSize = 50;
-            Bitmap bm = BitmapFactory.decodeByteArray(buff, 0, buff.length, ontain);
             String base64Str=PictureClass.BitmapToString(bm);
             diseaseinfo1.setPicture(base64Str);
 
@@ -252,7 +252,9 @@ public class Shoot_fragment extends Fragment {
                     //异常处理
                 }
             });
+            for(int i=0;i<=100;i++){
 
+            }
         }
     };
 
@@ -523,10 +525,12 @@ public class Shoot_fragment extends Fragment {
     }
 
     private class ImageSaver implements Runnable {
-        Image reader;
+        Bitmap bm;
+        byte[] buff;
 
-        public ImageSaver(Image reader) {
-            this.reader = reader;
+        public ImageSaver(Bitmap bm,byte[] buff) {
+            this.bm = bm;
+            this.buff=buff;
         }
 
         @Override
@@ -540,25 +544,20 @@ public class Shoot_fragment extends Fragment {
             FileOutputStream outputStream = null;
             try {
                 outputStream = new FileOutputStream(file);
-                ByteBuffer buffer = reader.getPlanes()[0].getBuffer();
-                //***************
-                //*****图片流****
-                byte[] buff = new byte[buffer.remaining()];
-                buffer.get(buff);
-                BitmapFactory.Options ontain = new BitmapFactory.Options();
-                ontain.inSampleSize = 50;
-                Bitmap bm = BitmapFactory.decodeByteArray(buff, 0, buff.length, ontain);
                 Message.obtain(mUIHandler, SETIMAGE, bm).sendToTarget();
                 outputStream.write(buff);
                 Log.d(TAG, "保存图片完成");
+                for(int i=0;i<=100;i++){
+
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-                if (reader != null) {
+                /*if (reader != null) {
                     reader.close();
-                }
+                }*/
                 if (outputStream != null) {
                     try {
                         outputStream.close();

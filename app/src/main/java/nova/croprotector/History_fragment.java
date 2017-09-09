@@ -56,13 +56,14 @@ public class History_fragment extends android.app.Fragment {
     private SharedPreferences sp2;
     private SharedPreferences.Editor editor2;
 
-    SwipeMenuRecyclerView recyclerView=(SwipeMenuRecyclerView)view.findViewById(R.id.recycler_view);
-    GridLayoutManager layoutManager=new GridLayoutManager(getActivity(),1);
+    SwipeMenuRecyclerView recyclerView;
+    GridLayoutManager layoutManager;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_history, container, false);
+        recyclerView=(SwipeMenuRecyclerView)view.findViewById(R.id.recycler_view);
         return view;
     }
 
@@ -70,6 +71,8 @@ public class History_fragment extends android.app.Fragment {
 	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+
+        layoutManager=new GridLayoutManager(getActivity(),1);
 
         //获取要显示的DiseaseInfo的数据
         //先检查本地的缓存文件，如果为空再从服务器获取数据

@@ -50,8 +50,8 @@ public class EditPassword_fragment extends Fragment implements View.OnClickListe
     Password password=new Password();
 
     //与用户信息文件相关
-    SharedPreferences sp=getActivity().getSharedPreferences("userdata", Context.MODE_PRIVATE);
-    SharedPreferences.Editor editor=sp.edit();
+    SharedPreferences sp;
+    SharedPreferences.Editor editor;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +63,10 @@ public class EditPassword_fragment extends Fragment implements View.OnClickListe
 	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+
+        sp=getActivity().getSharedPreferences("userdata", Context.MODE_PRIVATE);
+        editor=sp.edit();
+
 		oldPassword_input=(EditText)view.findViewById(R.id.oldPassword_input);
         newPassword_input=(EditText)view.findViewById(R.id.newPassword_input);
         newPassword_confirm=(EditText)view.findViewById(R.id.newPassword_confirm);
