@@ -30,6 +30,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.Range;
@@ -170,7 +171,7 @@ public class Shoot_fragment extends Fragment {
             loadingview=(com.wang.avi.AVLoadingIndicatorView)view.findViewById(R.id.avi);
 
             //弹出识别结果窗口
-            resultWindow(view);
+            final PopupWindow resultWindow=resultWindow(view);
             Log.d(TAG, "窗口已弹出");
 
             //网络传输接收数据，并存入缓存文件
@@ -203,6 +204,8 @@ public class Shoot_fragment extends Fragment {
             HttpUtil.sendHttpRequest("http://172.20.10.14:8080/Croprotector/TestPictureServlet",requestBody,new okhttp3.Callback(){
                 @Override
                 public void onResponse(Call call, Response response) throws IOException{
+                    //setSimulateClick(button, 160, 100);
+                    resultWindow.dismiss();
                     String responseData = response.body().string();
                     res=GsonToBean.fromJsonObject(responseData,DiseaseKind.class);
                     getActivity().runOnUiThread(new Runnable() {
@@ -595,7 +598,7 @@ public class Shoot_fragment extends Fragment {
 
 
     //识别后弹出结果窗口
-    private void resultWindow(View view){
+    private PopupWindow resultWindow(View view){
         //View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result, null);
         //1.构造一个PopupWindow，参数依次是加载的View，宽高
         final PopupWindow popWindow = new PopupWindow(view,
@@ -619,9 +622,10 @@ public class Shoot_fragment extends Fragment {
         popWindow.setBackgroundDrawable(new ColorDrawable(0x11111111));    //要为popWindow设置一个背景才有效
         //设置popupWindow显示的位置
         popWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        return popWindow;
     }
 
-    private void resultWindow_1(View view,String text){
+    private PopupWindow resultWindow_1(View view,String text){
         //View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result, null);
         //1.构造一个PopupWindow，参数依次是加载的View，宽高
         final PopupWindow popWindow = new PopupWindow(view,
@@ -647,5 +651,19 @@ public class Shoot_fragment extends Fragment {
         popWindow.setBackgroundDrawable(new ColorDrawable(0x11111111));    //要为popWindow设置一个背景才有效
         //设置popupWindow显示的位置
         popWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        return popWindow;
+    }
+
+    private void setSimulateClick(View view, float x, float y) {
+        long downTime = SystemClock.uptimeMillis();
+        final MotionEvent downEvent = MotionEvent.obtain(downTime, downTime,
+                MotionEvent.ACTION_DOWN, x, y, 0);
+        downTime += 1000;
+        final MotionEvent upEvent = MotionEvent.obtain(downTime, downTime,
+                MotionEvent.ACTION_UP, x, y, 0);
+        view.onTouchEvent(downEvent);
+        view.onTouchEvent(upEvent);
+        downEvent.recycle();
+        upEvent.recycle();
     }
 }
