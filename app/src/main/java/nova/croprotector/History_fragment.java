@@ -71,7 +71,6 @@ public class History_fragment extends android.app.Fragment {
 	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
         layoutManager=new GridLayoutManager(getActivity(),1);
 
         //获取要显示的DiseaseInfo的数据
@@ -204,6 +203,7 @@ public class History_fragment extends android.app.Fragment {
             }
 
         });
+
 
 
     }

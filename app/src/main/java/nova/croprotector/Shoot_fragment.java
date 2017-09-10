@@ -257,9 +257,7 @@ public class Shoot_fragment extends Fragment {
                     //异常处理
                 }
             });
-            for(int i=0;i<=100;i++){
 
-            }
         }
     };
 
