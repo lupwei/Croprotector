@@ -256,14 +256,15 @@ public class Shoot_fragment extends Fragment {
                     //异常处理
                 }
             });
-            new Handler().postDelayed(new Runnable(){
+            /*new Handler().postDelayed(new Runnable(){
                 public void run()
                 {
                     com.wang.avi.AVLoadingIndicatorView loading=(com.wang.avi.AVLoadingIndicatorView)view.findViewById(R.id.avi);
                     loading.setVisibility(View.INVISIBLE);
-                    resultWindow.update();
+                    resultWindow.dismiss();
                 }
-            }, 800);
+            }, 800);*/
+
         }
     };
 
