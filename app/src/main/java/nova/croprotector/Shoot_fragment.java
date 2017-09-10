@@ -205,7 +205,6 @@ public class Shoot_fragment extends Fragment {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException{
                     //setSimulateClick(button, 160, 100);
-                    resultWindow.dismiss();
                     String responseData = response.body().string();
                     res=GsonToBean.fromJsonObject(responseData,DiseaseKind.class);
                     getActivity().runOnUiThread(new Runnable() {
@@ -258,6 +257,12 @@ public class Shoot_fragment extends Fragment {
                 }
             });
 
+            new Handler().postDelayed(new Runnable(){
+                public void run()
+                {
+                    resultWindow.dismiss();
+                }
+            }, 500);
         }
     };
 
