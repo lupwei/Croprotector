@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     //Fragment 对象
     private UAV_fragment uavFragment;
     private Shoot_fragment shootFragment;
+    private Robot_fragment robotFragment;
     private Map_fragment mapFragment;
     private EditPassword_fragment passwordFragment;
     private History_fragment historyFragment;
@@ -141,7 +142,8 @@ public class MainActivity extends AppCompatActivity {
                         fTransaction.replace(R.id.fragment_container,uavFragment).commit();
                         break;
                     case R.id.robot:
-                        //TODO ROBOT FRAGMENT
+                        robotFragment=new Robot_fragment();
+                        fTransaction.replace(R.id.fragment_container,robotFragment).commit();
                         break;
                     case R.id.camera:
                         shootFragment = new Shoot_fragment();
