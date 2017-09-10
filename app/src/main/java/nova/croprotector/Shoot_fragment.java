@@ -101,6 +101,10 @@ public class Shoot_fragment extends Fragment {
     private TextView classify_no_result;
     private TextView classify_result_title;
 
+    //更新View状态
+    private static final int UPDATE_VIEW=1;
+    private Handler handler;
+
     //相机会话的监听器，通过他得到mCameraSession对象，这个对象可以用来发送预览和拍照请求
     private CameraCaptureSession.StateCallback mSessionStateCallBack = new CameraCaptureSession
             .StateCallback() {
@@ -228,6 +232,15 @@ public class Shoot_fragment extends Fragment {
                                 editor.commit();
                                 Log.d(TAG, "缓存文件已存储");
 
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Message message=new Message();
+                                        message.what=UPDATE_VIEW;
+                                        handler.sendMessage(message);
+                                    }
+                                }).start();
+
                                 //弹出识别结果窗口
                                 //classify_result_text.setText("检测结果为："+diseaseKind.getDiseaseName());
                                 //classify_result_title.setVisibility(View.VISIBLE);
@@ -257,12 +270,13 @@ public class Shoot_fragment extends Fragment {
                 }
             });
 
-            new Handler().postDelayed(new Runnable(){
-                public void run()
-                {
-                    resultWindow.dismiss();
+            handler=new Handler(){
+                public void handleMessage(Message msg){
+                    if(msg.what==UPDATE_VIEW){
+                        //更新View
+                    }
                 }
-            }, 500);
+            };
         }
     };
 
