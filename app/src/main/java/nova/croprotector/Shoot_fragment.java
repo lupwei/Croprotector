@@ -259,9 +259,11 @@ public class Shoot_fragment extends Fragment {
             new Handler().postDelayed(new Runnable(){
                 public void run()
                 {
-                    resultWindow.dismiss();
+                    com.wang.avi.AVLoadingIndicatorView loading=(com.wang.avi.AVLoadingIndicatorView)view.findViewById(R.id.avi);
+                    loading.setVisibility(View.INVISIBLE);
+                    resultWindow.update();
                 }
-            }, 500);
+            }, 800);
         }
     };
 
@@ -656,16 +658,4 @@ public class Shoot_fragment extends Fragment {
         return popWindow;
     }
 
-    private void setSimulateClick(View view, float x, float y) {
-        long downTime = SystemClock.uptimeMillis();
-        final MotionEvent downEvent = MotionEvent.obtain(downTime, downTime,
-                MotionEvent.ACTION_DOWN, x, y, 0);
-        downTime += 1000;
-        final MotionEvent upEvent = MotionEvent.obtain(downTime, downTime,
-                MotionEvent.ACTION_UP, x, y, 0);
-        view.onTouchEvent(downEvent);
-        view.onTouchEvent(upEvent);
-        downEvent.recycle();
-        upEvent.recycle();
-    }
 }
