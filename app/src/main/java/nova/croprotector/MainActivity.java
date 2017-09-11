@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             ((TextView)headerLayout.findViewById(R.id.username)).setText(userinfo);
         }
         else{
-            Login_activity.actionStart(MainActivity.this);
+            //Login_activity.actionStart(MainActivity.this);
             ((TextView)headerLayout.findViewById(R.id.username)).setText("未登录");
         }
 
@@ -259,6 +259,13 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, error == null ? "success" : error.getDescription());
             if(error == DJISDKError.REGISTRATION_SUCCESS) {
                 DJISDKManager.getInstance().startConnectionToProduct();
+                Handler handler = new Handler(Looper.getMainLooper());
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "Register Success", Toast.LENGTH_LONG).show();
+                    }
+                });
             } else {
                 Handler handler = new Handler(Looper.getMainLooper());
                 handler.post(new Runnable() {
