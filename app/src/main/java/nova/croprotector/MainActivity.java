@@ -126,6 +126,78 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        /*navigationView.setCheckedItem(R.id.home);
+        fManager = getFragmentManager();
+        FragmentTransaction fTransaction = fManager.beginTransaction();
+        uavFragment = new UAV_fragment();
+        fTransaction.add(R.id.fragment_container,uavFragment).commit();
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                fManager = getFragmentManager();
+                FragmentTransaction fTransaction = fManager.beginTransaction();
+                switch (item.getItemId()){
+                    case R.id.home:
+                        uavFragment = new UAV_fragment();
+                        fTransaction.replace(R.id.fragment_container,uavFragment).commit();
+                        break;
+                    case R.id.robot:
+                        robotFragment=new Robot_fragment();
+                        fTransaction.replace(R.id.fragment_container,robotFragment).commit();
+                        break;
+                    case R.id.camera:
+                        shootFragment = new Shoot_fragment();
+                        fTransaction.replace(R.id.fragment_container,shootFragment).commit();
+                        break;
+                    case R.id.map:
+                        mapFragment = new Map_fragment();
+                        fTransaction.replace(R.id.fragment_container,mapFragment).commit();
+                        break;
+                    case R.id.history:
+                        historyFragment=new History_fragment();
+                        fTransaction.replace(R.id.fragment_container, historyFragment).commit();
+                        break;
+                    case R.id.password:
+                        passwordFragment = new EditPassword_fragment();
+                        fTransaction.replace(R.id.fragment_container, passwordFragment).commit();
+                        break;
+                    /*case R.id.help:
+                        helpFragment = new help_fragment();
+                        fTransaction.replace(R.id.fragment_container, helpFragment).commit();
+                        break;*/
+                    /*case R.id.logout:
+                        editor1.clear();
+                        editor1.commit();
+                        editor2.clear();
+                        editor2.commit();
+                        Login_activity.actionStart(MainActivity.this);
+                        break;
+                }
+
+                drawerLayout.closeDrawers();
+                return true;
+            }
+        });*/
+
+
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
+                PackageManager.PERMISSION_DENIED) {
+            // When the compile and target version is higher than 22, please request the
+            // following permissions at runtime to ensure the
+            // SDK work well.
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                ActivityCompat.requestPermissions(this, PERMISSIONS, 1);
+            }
+
+        }
+
+
+        //Initialize DJI SDK Manager
+        mHandler = new Handler(Looper.getMainLooper());
+        DJISDKManager.getInstance().registerApp(this, mDJISDKManagerCallback);
+
         navigationView.setCheckedItem(R.id.home);
         fManager = getFragmentManager();
         FragmentTransaction fTransaction = fManager.beginTransaction();
@@ -178,26 +250,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
-                PackageManager.PERMISSION_DENIED) {
-            // When the compile and target version is higher than 22, please request the
-            // following permissions at runtime to ensure the
-            // SDK work well.
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                ActivityCompat.requestPermissions(this, PERMISSIONS, 1);
-            }
-
-        }
-
-
-        //Initialize DJI SDK Manager
-        mHandler = new Handler(Looper.getMainLooper());
-        DJISDKManager.getInstance().registerApp(this, mDJISDKManagerCallback);
-
     }
 
     // DJISDKManager callback and implementations of onGetRegisteredResult and onProductChanged

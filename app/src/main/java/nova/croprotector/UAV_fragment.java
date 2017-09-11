@@ -45,17 +45,10 @@ public class UAV_fragment extends Fragment implements View.OnClickListener {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //help_fragment helpFragment=new help_fragment();
-                /*FragmentManager fm = getFragmentManager();
-                FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.fragment_container,helpFragment);
-                ft.addToBackStack(null);
-                ft.commit();*/
                 FragmentManager fManager = getFragmentManager();
                 FragmentTransaction fTransaction = fManager.beginTransaction();
                 help_fragment helpFragment=new help_fragment();
                 fTransaction.replace(R.id.fragment_container,helpFragment).commit();
-                //Toast.makeText(UAV_fragment.this.getActivity(), "FAB clicked", Toast.LENGTH_SHORT).show();
             }
         });
 
