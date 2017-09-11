@@ -70,7 +70,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="89dp" />-->
 
-    <android.support.v7.widget.AppCompatButton
+    <!--<android.support.v7.widget.AppCompatButton
         android:id="@+id/connect"
         android:layout_width="230dp"
         android:layout_height="45dp"
@@ -80,10 +80,10 @@
         android:textColor="@color/white"
         android:background="@drawable/round_btn"
         android:layout_below="@+id/uav_image"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true" />-->
 
 
-    <!--<Button
+    <Button
         android:id="@+id/connect"
         android:layout_width="150dp"
         android:layout_height="55dp"
@@ -95,7 +95,7 @@
         android:layout_below="@+id/text_product_info"
         android:layout_marginBottom="80dp"
         android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true" />-->
+        android:layout_centerHorizontal="true" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
