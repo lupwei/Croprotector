@@ -275,6 +275,7 @@ public class Shoot_fragment extends Fragment {
                 public void handleMessage(Message msg){
                     if(msg.what==UPDATE_VIEW){
                         //更新View
+                        resultWindow.dismiss();
                     }
                 }
             };

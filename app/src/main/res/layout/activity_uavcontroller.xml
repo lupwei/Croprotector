@@ -60,6 +60,7 @@
             android:layout_marginRight="0dp"
             android:layout_gravity="right"
             android:background="@drawable/shoot"/>
+
         <ToggleButton
             android:id="@+id/btn_record"
             android:layout_width="0dp"
@@ -104,5 +105,15 @@
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="0dp"
         android:visibility="invisible"/>
+
+        <Button
+            android:id="@+id/btn_wayPoint"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+
+            android:background="@mipmap/ic_add_location_white_48dp"
+            tools:layout_editor_absoluteX="522dp"
+            tools:layout_editor_absoluteY="46dp" />
     </FrameLayout>
+
 </android.support.constraint.ConstraintLayout>

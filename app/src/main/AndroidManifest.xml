@@ -19,7 +19,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
@@ -48,7 +47,8 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="333bfd3cb3533cd01197ad863681dcb3" />
-        <service android:name="com.amap.api.location.APSService"></service>
+
+        <service android:name="com.amap.api.location.APSService" />
 
         <!-- DJI SDK -->
         <uses-library android:name="com.android.future.usb.accessory" />
@@ -72,7 +72,8 @@
         <service android:name="dji.sdk.sdkmanager.DJIGlobalService" />
         <!-- DJI SDK -->
 
-        <activity android:name=".Login_activity"
+        <activity
+            android:name=".Login_activity"
             android:screenOrientation="portrait">
 
             <!--
@@ -82,7 +83,8 @@
             </intent-filter>
             -->
         </activity>
-        <activity android:name=".regist_activity"
+        <activity
+            android:name=".regist_activity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
@@ -94,10 +96,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UAVControllerActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".DiseaseSettingActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".UAVControllerActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".DiseaseSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".WayPointActivity"></activity>
     </application>
 
 </manifest>

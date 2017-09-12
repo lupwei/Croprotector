@@ -24,7 +24,7 @@ import dji.sdk.products.Aircraft;
 public class UAV_fragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "UAV_fragment";
-    private TextView mTextConnectionStatus;
+    //private TextView mTextConnectionStatus;
     private TextView mTextProduct;
     private Button mBtnOpen;
     View view;
@@ -40,17 +40,6 @@ public class UAV_fragment extends Fragment implements View.OnClickListener {
         IntentFilter filter = new IntentFilter();
         filter.addAction(FPVDemoApplication.FLAG_CONNECTION_CHANGE);
         getActivity().registerReceiver(mReceiver, filter);
-
-        FloatingActionButton fab=(FloatingActionButton)view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentManager fManager = getFragmentManager();
-                FragmentTransaction fTransaction = fManager.beginTransaction();
-                help_fragment helpFragment=new help_fragment();
-                fTransaction.replace(R.id.fragment_container,helpFragment).commit();
-            }
-        });
 
         return view;
     }
@@ -81,7 +70,19 @@ public class UAV_fragment extends Fragment implements View.OnClickListener {
         mTextProduct = (TextView) view.findViewById(R.id.text_product_info);
         mBtnOpen = (Button) view.findViewById(R.id.connect);
         mBtnOpen.setOnClickListener(this);
-        mBtnOpen.setEnabled(false);
+        mBtnOpen.setEnabled(true);
+
+        FloatingActionButton fab=(FloatingActionButton)view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fManager = getFragmentManager();
+                FragmentTransaction fTransaction = fManager.beginTransaction();
+                help_fragment helpFragment=new help_fragment();
+                fTransaction.replace(R.id.fragment_container,helpFragment).commit();
+            }
+        });
+
     }
     protected BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override
@@ -101,7 +102,7 @@ public class UAV_fragment extends Fragment implements View.OnClickListener {
             Log.v(TAG, "refreshSDK: True");
             mBtnOpen.setEnabled(true);
             String str = mProduct instanceof Aircraft ? "DJIAircraft" : "DJIHandHeld";
-            mTextConnectionStatus.setText("Status: " + str + " connected");
+            //mTextConnectionStatus.setText("Status: " + str + " connected");
             //mProduct.setDJIVersionCallback(this);
             if (null != mProduct.getModel()) {
                 mTextProduct.setText("" + mProduct.getModel().getDisplayName());
@@ -112,7 +113,7 @@ public class UAV_fragment extends Fragment implements View.OnClickListener {
             Log.v(TAG, "refreshSDK: False");
             mBtnOpen.setEnabled(false);
             mTextProduct.setText(R.string.product_information);
-            mTextConnectionStatus.setText(R.string.connection_loose);
+            //mTextConnectionStatus.setText(R.string.connection_loose);
         }
     }
     @Override

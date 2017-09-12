@@ -36,11 +36,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile project(':dJISDKLIB')
-
     compile project(':Amap_2DMap_V5.2.0_20170627')
     compile project(':Android_Map3D_SDK_V5.3.0_20170815')
     compile project(':AMap_Search_V5.3.1_20170817')
     compile project(':AMap_Location_V3.5.0_20170731')
+    compile project(':dji-uilibrary')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:recyclerview-v7:25.3.1'

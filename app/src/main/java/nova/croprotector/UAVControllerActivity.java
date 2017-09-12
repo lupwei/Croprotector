@@ -34,7 +34,7 @@ public class UAVControllerActivity extends Activity implements TextureView.Surfa
     protected DJICodecManager mCodecManager = null;
 
     protected TextureView mVideoSurface = null;
-    private Button mCaptureBtn, mShootPhotoModeBtn, mRecordVideoModeBtn;
+    private Button mCaptureBtn, mShootPhotoModeBtn, mRecordVideoModeBtn, mWayPointBtn;
     private ToggleButton mRecordBtn;
     private TextView recordingTime;
 
@@ -153,6 +153,7 @@ public class UAVControllerActivity extends Activity implements TextureView.Surfa
         mRecordBtn = (ToggleButton) findViewById(R.id.btn_record);
         mShootPhotoModeBtn = (Button) findViewById(R.id.btn_shoot_photo_mode);
         mRecordVideoModeBtn = (Button) findViewById(R.id.btn_record_video_mode);
+        mWayPointBtn=(Button)findViewById(R.id.btn_wayPoint);
 
         if (null != mVideoSurface) {
             mVideoSurface.setSurfaceTextureListener(this);
@@ -162,6 +163,7 @@ public class UAVControllerActivity extends Activity implements TextureView.Surfa
         mRecordBtn.setOnClickListener(this);
         mShootPhotoModeBtn.setOnClickListener(this);
         mRecordVideoModeBtn.setOnClickListener(this);
+        mWayPointBtn.setOnClickListener(this);
 
         recordingTime.setVisibility(View.INVISIBLE);
 
@@ -254,6 +256,11 @@ public class UAVControllerActivity extends Activity implements TextureView.Surfa
             }
             case R.id.btn_record_video_mode:{
                 switchCameraMode(SettingsDefinitions.CameraMode.RECORD_VIDEO);
+                break;
+            }
+            case R.id.btn_wayPoint:{
+                Intent intent = new Intent(this, WayPointActivity.class);
+                startActivity(intent);
                 break;
             }
             default:
