@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,9 @@ public class History_fragment extends android.app.Fragment {
 	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+        Log.d("tag", "onActivityCreated: 111111111111111111111111111111111");
         layoutManager=new GridLayoutManager(getActivity(),1);
+        Log.d("tag", "onActivityCreated: 2222222222222222222222222222222222222");
 
         //获取要显示的DiseaseInfo的数据
         //先检查本地的缓存文件，如果为空再从服务器获取数据
@@ -85,6 +88,7 @@ public class History_fragment extends android.app.Fragment {
             //取出用户手机号
             sp2=getActivity().getSharedPreferences("userdata",Context.MODE_PRIVATE);
             String phonenumber=sp2.getString("phonenumber","用户信息文件受损，请重新登录");
+            Log.d("tag", "onActivityCreated: 33333333333333333333333333333333");
 
             String jsonStr=gson.toJson(phonenumber);
             RequestBody requestBody=RequestBody.create(JSON,jsonStr);
@@ -132,6 +136,9 @@ public class History_fragment extends android.app.Fragment {
                     diseaseInfoList.add(diseaseinfo);
                 }
             }
+            recyclerView.setLayoutManager(layoutManager);
+            adapter=new DiseaseInfoAdapter(diseaseInfoList);
+            recyclerView.setAdapter(adapter);
         }
 
 
