@@ -191,8 +191,10 @@ public class Shoot_fragment extends Fragment {
             //设置diseaseNo，diseaseKind，longitude,latitude，因为此时还未检测，所以全部是默认值
             diseaseinfo1.setDiseaseNo("未检测");
             diseaseinfo1.setDiseaseKind(new DiseaseKind());
-            diseaseinfo1.setLongitude(-1.0);
-            diseaseinfo1.setLatitude(-1.0);
+            double longitude=SetLocation.setLongitude();
+            diseaseinfo1.setLongitude(longitude);
+            double latitude=SetLocation.setLatitude();
+            diseaseinfo1.setLatitude(latitude);
 
             //从用户信息的缓存文件中取出phonenumber
             sp=getActivity().getSharedPreferences("userdata",Context.MODE_PRIVATE);
