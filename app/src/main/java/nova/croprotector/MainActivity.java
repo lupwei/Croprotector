@@ -183,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.analysis:
                         analysisFragment = new Analysis_fragment();
                         fTransaction.replace(R.id.fragment_container, analysisFragment).commit();
+                        break;
                     /*case R.id.help:
                         helpFragment = new help_fragment();
                         fTransaction.replace(R.id.fragment_container, helpFragment).commit();

@@ -19,6 +19,9 @@ import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
@@ -60,9 +63,22 @@ public class HistoryMap_fragment extends android.app.Fragment implements Compoun
 	
 	@Override
     public void onActivityCreated(Bundle savedInstanceState) {
-    super.onActivityCreated(savedInstanceState);
-	initview(savedInstanceState,view);
+        super.onActivityCreated(savedInstanceState);
+	    initview(savedInstanceState,view);
 
+        //beta版测试数据
+        LatLng latLng = new LatLng(46.11771441,85.66042721);
+        final Marker marker = aMap.addMarker(new MarkerOptions().position(latLng).title("苹果痂").snippet("苹果黑星菌"));
+        LatLng latLng0 = new LatLng(46.1176103,85.66013753);
+        final Marker marker0 = aMap.addMarker(new MarkerOptions().position(latLng0).title("樱桃白粉病").snippet("叉丝单囊壳菌"));
+        LatLng latLng1 = new LatLng(46.11736487,85.65952599);
+        final Marker marker1 = aMap.addMarker(new MarkerOptions().position(latLng1).title("玉米灰斑病").snippet("尖孢科孢子虫"));
+        LatLng latLng2 = new LatLng(46.11653192,85.66003025);
+        final Marker marker2 = aMap.addMarker(new MarkerOptions().position(latLng2).title("葡萄黑腐病").snippet("葡萄球座菌"));
+        LatLng latLng3 = new LatLng(46.11668066,85.66159666);
+        final Marker marker3 = aMap.addMarker(new MarkerOptions().position(latLng3).title("甜椒菌斑").snippet("野油菜黃單孢菌"));
+        LatLng latLng4 = new LatLng(46.11644267,85.66081345);
+        final Marker marker4 = aMap.addMarker(new MarkerOptions().position(latLng4).title("甜椒菌斑").snippet("野油菜黃單孢菌"));
         //圆形菜单
         CircleMenu circleMenu = (CircleMenu) view.findViewById(R.id.circle_menu);
 
