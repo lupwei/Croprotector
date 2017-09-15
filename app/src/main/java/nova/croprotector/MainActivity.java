@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
     private Map_fragment mapFragment;
     private EditPassword_fragment passwordFragment;
     private History_fragment historyFragment;
+    private Analysis_fragment analysisFragment;
     private help_fragment helpFragment;
     private FragmentManager fManager;
 
@@ -126,60 +127,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        /*navigationView.setCheckedItem(R.id.home);
-        fManager = getFragmentManager();
-        FragmentTransaction fTransaction = fManager.beginTransaction();
-        uavFragment = new UAV_fragment();
-        fTransaction.add(R.id.fragment_container,uavFragment).commit();
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                fManager = getFragmentManager();
-                FragmentTransaction fTransaction = fManager.beginTransaction();
-                switch (item.getItemId()){
-                    case R.id.home:
-                        uavFragment = new UAV_fragment();
-                        fTransaction.replace(R.id.fragment_container,uavFragment).commit();
-                        break;
-                    case R.id.robot:
-                        robotFragment=new Robot_fragment();
-                        fTransaction.replace(R.id.fragment_container,robotFragment).commit();
-                        break;
-                    case R.id.camera:
-                        shootFragment = new Shoot_fragment();
-                        fTransaction.replace(R.id.fragment_container,shootFragment).commit();
-                        break;
-                    case R.id.map:
-                        mapFragment = new Map_fragment();
-                        fTransaction.replace(R.id.fragment_container,mapFragment).commit();
-                        break;
-                    case R.id.history:
-                        historyFragment=new History_fragment();
-                        fTransaction.replace(R.id.fragment_container, historyFragment).commit();
-                        break;
-                    case R.id.password:
-                        passwordFragment = new EditPassword_fragment();
-                        fTransaction.replace(R.id.fragment_container, passwordFragment).commit();
-                        break;
-                    /*case R.id.help:
-                        helpFragment = new help_fragment();
-                        fTransaction.replace(R.id.fragment_container, helpFragment).commit();
-                        break;*/
-                    /*case R.id.logout:
-                        editor1.clear();
-                        editor1.commit();
-                        editor2.clear();
-                        editor2.commit();
-                        Login_activity.actionStart(MainActivity.this);
-                        break;
-                }
-
-                drawerLayout.closeDrawers();
-                return true;
-            }
-        });*/
-
-
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
                 PackageManager.PERMISSION_DENIED) {
@@ -233,6 +180,9 @@ public class MainActivity extends AppCompatActivity {
                         passwordFragment = new EditPassword_fragment();
                         fTransaction.replace(R.id.fragment_container, passwordFragment).commit();
                         break;
+                    case R.id.analysis:
+                        analysisFragment = new Analysis_fragment();
+                        fTransaction.replace(R.id.fragment_container, analysisFragment).commit();
                     /*case R.id.help:
                         helpFragment = new help_fragment();
                         fTransaction.replace(R.id.fragment_container, helpFragment).commit();
@@ -243,6 +193,8 @@ public class MainActivity extends AppCompatActivity {
                         editor2.clear();
                         editor2.commit();
                         Login_activity.actionStart(MainActivity.this);
+                        break;
+                    default:
                         break;
                 }
 

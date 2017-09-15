@@ -24,6 +24,10 @@
             android:id="@+id/history"
             android:icon="@mipmap/ic_history_black_48dp"
             android:title="历史"/>
+        <item
+            android:id="@+id/analysis"
+            android:icon="@mipmap/ic_insert_chart_black_48dp"
+            android:title="分析工具"/>
     </group>
 
 
