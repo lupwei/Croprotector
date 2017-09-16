@@ -1,9 +1,10 @@
 package nova.croprotector;
 
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +17,7 @@ import com.shizhefei.view.largeimage.factory.InputStreamBitmapDecoderFactory;
 
 import java.io.IOException;
 
-public class help_fragment extends android.app.Fragment {
+public class help_fragment extends Fragment {
 
 
     @Override

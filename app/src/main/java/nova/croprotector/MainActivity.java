@@ -1,8 +1,8 @@
 package nova.croprotector;
 
 import android.Manifest;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -146,14 +146,14 @@ public class MainActivity extends AppCompatActivity {
         DJISDKManager.getInstance().registerApp(this, mDJISDKManagerCallback);
 
         navigationView.setCheckedItem(R.id.home);
-        fManager = getFragmentManager();
+        fManager = getSupportFragmentManager();
         FragmentTransaction fTransaction = fManager.beginTransaction();
         uavFragment = new UAV_fragment();
         fTransaction.add(R.id.fragment_container,uavFragment).commit();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                fManager = getFragmentManager();
+                fManager = getSupportFragmentManager();
                 FragmentTransaction fTransaction = fManager.beginTransaction();
                 switch (item.getItemId()){
                     case R.id.home:
@@ -183,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.analysis:
                         analysisFragment = new Analysis_fragment();
                         fTransaction.replace(R.id.fragment_container, analysisFragment).commit();
+                        break;
                     /*case R.id.help:
                         helpFragment = new help_fragment();
                         fTransaction.replace(R.id.fragment_container, helpFragment).commit();

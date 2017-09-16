@@ -1,7 +1,8 @@
 package nova.croprotector;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -34,7 +35,7 @@ import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class History_fragment extends android.app.Fragment {
+public class History_fragment extends Fragment {
 
     private int choice=-1;
 	private View view;

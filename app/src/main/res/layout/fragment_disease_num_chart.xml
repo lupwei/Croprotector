@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    tools:context="nova.croprotector.disease_num_chart_fragment">
+
+    <TextView
+        android:id="@+id/linechart_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/primary_dark"
+        android:textSize="25dp"
+        />
+
+    <lecho.lib.hellocharts.view.LineChartView
+        android:id="@+id/disease_num_linechart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="6dp"
+        android:background="@color/white"/>
+
+    <lecho.lib.hellocharts.view.ColumnChartView
+        android:id="@+id/disease_num_columnchart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:transitionName="line_depend_column" />
+
+</LinearLayout>

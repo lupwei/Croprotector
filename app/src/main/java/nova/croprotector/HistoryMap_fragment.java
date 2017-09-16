@@ -1,8 +1,8 @@
 package nova.croprotector;
 
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,7 +24,7 @@ import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
 
-public class HistoryMap_fragment extends android.app.Fragment implements CompoundButton.OnCheckedChangeListener,LocationSource,AMapLocationListener {
+public class HistoryMap_fragment extends Fragment implements CompoundButton.OnCheckedChangeListener,LocationSource,AMapLocationListener {
     private MapView mapView;
     private AMap aMap;
     private MyLocationStyle myLocationStyle;
