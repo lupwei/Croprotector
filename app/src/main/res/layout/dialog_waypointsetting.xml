@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Waypoint Configuration"
+        android:text="航点配置"
         android:layout_gravity="center_horizontal">
     </TextView>
 
@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Altitude:">
+            android:text="飞行高度：">
         </TextView>
         <EditText
             android:id="@+id/altitude"
@@ -46,7 +46,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Speed:">
+            android:text="速度：">
         </TextView>
         <RadioGroup
             android:layout_width="wrap_content"
@@ -58,17 +58,17 @@
                 android:id="@+id/lowSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Low"/>
+                android:text="低"/>
             <RadioButton
                 android:id="@+id/MidSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mid"/>
+                android:text="中"/>
             <RadioButton
                 android:id="@+id/HighSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="High"/>
+                android:text="高"/>
         </RadioGroup>
     </LinearLayout>
 
@@ -83,7 +83,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Action After Finished:"/>
+            android:text="飞行结束后："/>
     </LinearLayout>
 
     <LinearLayout
@@ -101,25 +101,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="5pt"
-                android:text="None"/>
+                android:text="无"/>
             <RadioButton
                 android:id="@+id/finishGoHome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="5pt"
-                android:text="GoHome"/>
+                android:text="返航"/>
             <RadioButton
                 android:id="@+id/finishAutoLanding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="5pt"
-                android:text="AutoLand"/>
+                android:text="自动降落"/>
             <RadioButton
                 android:id="@+id/finishToFirst"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="5pt"
-                android:text="BackTo 1st"/>
+                android:text="返回至第一个航点"/>
         </RadioGroup>
     </LinearLayout>
 
@@ -152,25 +152,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="5pt"
-                android:text="Auto"/>
+                android:text="自动"/>
             <RadioButton
                 android:id="@+id/headingInitDirec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="5pt"
-                android:text="Initial"/>
+                android:text="初始"/>
             <RadioButton
                 android:id="@+id/headingRC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="5pt"
-                android:text="RC Control"/>
+                android:text="RC 控制"/>
             <RadioButton
                 android:id="@+id/headingWP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="5pt"
-                android:text="Use Waypoint"/>
+                android:text="使用航点"/>
         </RadioGroup>
     </LinearLayout>
 </LinearLayout>

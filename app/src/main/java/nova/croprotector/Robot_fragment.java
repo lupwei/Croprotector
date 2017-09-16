@@ -28,9 +28,9 @@ public class Robot_fragment extends Fragment {
     private int choice=-1;
 
     private RobotInfo[] diseases={
-            new RobotInfo("编号：01","在线",R.drawable.disease_pic1),
-            new RobotInfo("编号：02","离线",R.drawable.disease_pic1),
-            new RobotInfo("未检测到新设备"," ",R.drawable.disease_pic1)
+            new RobotInfo("编号：01","在线",R.drawable.devastator),
+            new RobotInfo("编号：02","离线",R.drawable.devastator),
+            new RobotInfo("未检测到新设备"," ",R.mipmap.ic_quest)
     };
 
     private List<RobotInfo> diseaseInfoList =new ArrayList<>();
