@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
+import com.yanzhenjie.recyclerview.swipe.SwipeItemClickListener;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.yanzhenjie.recyclerview.swipe.touch.OnItemMoveListener;
 
@@ -167,6 +168,13 @@ public class History_fragment extends android.app.Fragment {
             }
         };
         recyclerView.setOnItemMoveListener(mItemMoveListener);// 监听拖拽，更新UI。
+        recyclerView.setSwipeItemClickListener(new SwipeItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                // TODO
+                SuggestionActivity.actionStart(getActivity());
+            }
+        });
 
 
         //圆形菜单
