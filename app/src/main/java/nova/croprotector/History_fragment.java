@@ -1,5 +1,7 @@
 package nova.croprotector;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -78,9 +80,58 @@ public class History_fragment extends Fragment {
         layoutManager=new GridLayoutManager(getActivity(),1);
         Log.d("tag", "onActivityCreated: 2222222222222222222222222222222222222");
 
+        DiseaseInfo info1=new DiseaseInfo();
+        DiseaseKind kind1=new DiseaseKind();
+        kind1.setDiseaseNo("4");
+        kind1.setDiseaseName("苹果痂-苹果黑星菌");
+        info1.setInfoNo("182173664982017-09-17 16:43:33");
+        info1.setDiseaseNo("4");
+        info1.setDiseaseKind(kind1);
+        info1.setInfoTime("2017-09-17 16:43:33");
+        info1.setLongitude(82.37940387558315);
+        info1.setLatitude(31.730400581746217);
+        Bitmap bitmap1= BitmapFactory.decodeResource(getResources(), R.drawable.disease1);
+        String picStr1=PictureClass.BitmapToString(bitmap1);
+        info1.setPicture(picStr1);
+
+        DiseaseInfo info2=new DiseaseInfo();
+        DiseaseKind kind2=new DiseaseKind();
+        kind2.setDiseaseNo("6");
+        kind2.setDiseaseName("健康的苹果");
+        info2.setInfoNo("182173664982017-09-17 16:44:46");
+        info2.setDiseaseNo("6");
+        info2.setDiseaseKind(kind2);
+        info2.setInfoTime("2017-09-17 16:44:46");
+        info2.setLongitude(86.00917825089101);
+        info2.setLatitude(35.08582343676832);
+        Bitmap bitmap2= BitmapFactory.decodeResource(getResources(), R.drawable.disease2);
+        String picStr2=PictureClass.BitmapToString(bitmap2);
+        info2.setPicture(picStr2);
+
+        DiseaseInfo info3=new DiseaseInfo();
+        DiseaseKind kind3=new DiseaseKind();
+        kind3.setDiseaseNo("1");
+        kind3.setDiseaseName("苹果黑腐病-榅桲囊孢壳菌");
+        info3.setInfoNo("182173664982017-09-17 16:59:57");
+        info3.setDiseaseNo("1");
+        info3.setDiseaseKind(kind3);
+        info3.setInfoTime("2017-09-17 16:59:57");
+        info3.setLongitude(87.43472877178868);
+        info3.setLatitude(36.178394669998454);
+        Bitmap bitmap3= BitmapFactory.decodeResource(getResources(), R.drawable.disease3);
+        String picStr3=PictureClass.BitmapToString(bitmap3);
+        info3.setPicture(picStr3);
+
+        for(int i=0;i<3;i++){
+            diseaseInfoList.add(info1);
+            diseaseInfoList.add(info2);
+            diseaseInfoList.add(info3);
+        }
+
         //获取要显示的DiseaseInfo的数据
         //先检查本地的缓存文件，如果为空再从服务器获取数据
 
+        /*
         //检查本地的缓存文件
         sp1=getActivity().getSharedPreferences("infodata", Context.MODE_PRIVATE);
         editor1=sp1.edit();
@@ -142,10 +193,11 @@ public class History_fragment extends Fragment {
             adapter=new DiseaseInfoAdapter(diseaseInfoList);
             recyclerView.setAdapter(adapter);
         }
+        */
 
-
-
-
+        recyclerView.setLayoutManager(layoutManager);
+        adapter=new DiseaseInfoAdapter(diseaseInfoList);
+        recyclerView.setAdapter(adapter);
         recyclerView.setItemViewSwipeEnabled(true); // 开启滑动删除。
 
         OnItemMoveListener mItemMoveListener = new OnItemMoveListener() {
