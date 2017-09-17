@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/classify_result_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="识别结果"
+        android:textColor="@color/iron"
+        android:textSize="18sp"/>
+
+
+    <TextView
+        android:id="@+id/classify_result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/classify_result_title"
+        android:textColor="@color/iron"
+        android:textSize="18sp"
+        android:layout_alignBottom="@+id/avi"
+        android:layout_marginBottom="23dp"
+        android:layout_alignStart="@+id/avi" />
+
+
+</RelativeLayout>

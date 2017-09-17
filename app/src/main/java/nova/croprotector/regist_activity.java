@@ -4,9 +4,12 @@ package nova.croprotector;
  */
 import android.content.Context;
 import android.content.Intent;
-import android.os.Looper;
+
+import android.content.SharedPreferences;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,19 +22,19 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-//注册活动；
+//注册活动；还有用户名没加
 public class regist_activity extends AppCompatActivity {
 
-    private EditText username_edit;
+    private EditText phoneNumber_input;
     private EditText password_edit;
+    private EditText userName_input;
     private CommonResponse<String> res=new CommonResponse<String>();
     private static final MediaType JSON=MediaType.parse("application/json;charset=utf-8");
     Gson gson = new Gson();
+    User user = new User();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +42,20 @@ public class regist_activity extends AppCompatActivity {
         setContentView(R.layout.regist_layout);
 
         Button complete = (Button) findViewById(R.id.complete);
-        username_edit = (EditText) findViewById(R.id.username_edit);
+        phoneNumber_input = (EditText) findViewById(R.id.phoneNumber_input);
         password_edit = (EditText) findViewById(R.id.password_edit);
+        userName_input = (EditText) findViewById(R.id.userName_input);
 
         complete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phonenumber = username_edit.getText().toString();
+                String phonenumber = phoneNumber_input.getText().toString();
                 String password = password_edit.getText().toString();
-                User user = new User();
+                String username= userName_input.getText().toString();
                 user.setPhoneNumber(phonenumber);
                 user.setPassword(password);
+                user.setFirstname(username);
+                user.setLastname(username);
 
                 String jsonStr=gson.toJson(user);
                 RequestBody requestBody=RequestBody.create(JSON,jsonStr);
@@ -63,6 +69,17 @@ public class regist_activity extends AppCompatActivity {
                             public void run() {
                                 if(res.code==0){
                                     Toast.makeText(regist_activity.this, res.data, Toast.LENGTH_SHORT).show();
+                                    //存储用户信息到userdata文件中
+                                    SharedPreferences sp=getSharedPreferences("userdata",MODE_PRIVATE);
+                                    SharedPreferences.Editor editor=sp.edit();
+                                    editor.putBoolean("isLogin",true);
+                                    editor.putString("phonenumber",user.Get_phonenumber());
+                                    editor.putString("password",user.Get_password());
+                                    editor.putString("username",user.Get_firstname());
+                                    editor.commit();
+                                    Log.d("regist_activity", user.Get_phonenumber());
+                                    Log.d("regist_activity", user.Get_password());
+                                    Log.d("regist_activity", user.Get_firstname());
                                     MainActivity.actionStart(regist_activity.this);
                                 }
                                 else{

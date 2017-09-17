@@ -4,10 +4,48 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">#388E3C</item>
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <item name="colorAccent">#8BC34A</item>
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
+        <!--<item name="actionBarSize">10dp</item>-->
+    </style>
+
+
+    <style name="AppTheme_0" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">#388E3C</item>
+        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
+        <item name="colorAccent">#8BC34A</item>
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
         <item name="android:listDivider">@drawable/divide_line</item>
         <!--<item name="actionBarSize">10dp</item>-->
+        <item name="colorControlNormal">@color/iron</item>
+        <item name="colorControlActivated">@color/iron</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:textColorHint">@color/iron</item>
+    </style>
+
+    <style name="AppTheme_1" parent="@android:style/Theme.Holo.Light">
+        <item name="colorPrimary">#388E3C</item>
+        <item name="colorPrimaryDark">#388E3C</item>
+        <item name="colorAccent">#8BC34A</item>
+        <item name="android:actionMenuTextColor">@color/white</item>
+        <item name="android:titleTextColor">@color/white</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorControlHighlight">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+    </style>
+
+    <style name="MyActionBar" parent="@style/Widget.AppCompat.ActionBar">
+        <item name="android:titleTextStyle">@style/TextAppearance.Holo.Widget.ActionBar.Title.Own</item>
+    </style>
+
+    <style name="TextAppearance.Holo.Widget.ActionBar.Title.Own"
+        parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 
 

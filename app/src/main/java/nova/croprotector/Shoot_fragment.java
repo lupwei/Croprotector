@@ -1,12 +1,16 @@
 package nova.croprotector;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
+
+
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
+import android.graphics.drawable.ColorDrawable;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraCharacteristics;
@@ -26,10 +30,12 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.Range;
 import android.util.Size;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.Surface;
@@ -38,15 +44,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
+
+import okhttp3.Call;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class Shoot_fragment extends Fragment {
@@ -64,6 +81,30 @@ public class Shoot_fragment extends Fragment {
     CameraCaptureSession mCameraSession;
     CameraCharacteristics mCameraCharacteristics;
     Ringtone ringtone;
+
+    ByteBuffer mBuffer=null;
+
+
+    //网络通信数据传输相关
+    private Gson gson=new Gson();
+    private CommonResponse<DiseaseKind> res=new CommonResponse<DiseaseKind>();
+    private static final MediaType JSON=MediaType.parse("application/json;charset=utf-8");
+    private DiseaseInfo diseaseinfo1=new DiseaseInfo();
+
+    //用户信息缓存文件存储
+    private SharedPreferences sp;
+    private SharedPreferences.Editor editor;
+
+    //弹窗控件
+    private TextView classify_result_text;
+    private com.wang.avi.AVLoadingIndicatorView loadingview;
+    private TextView classify_no_result;
+    private TextView classify_result_title;
+
+    //更新View状态
+    private static final int UPDATE_VIEW=1;
+    private Handler handler;
+
     //相机会话的监听器，通过他得到mCameraSession对象，这个对象可以用来发送预览和拍照请求
     private CameraCaptureSession.StateCallback mSessionStateCallBack = new CameraCaptureSession
             .StateCallback() {
@@ -117,7 +158,140 @@ public class Shoot_fragment extends Fragment {
             .OnImageAvailableListener() {
         @Override
         public void onImageAvailable(ImageReader imageReader) {
-            mHandler.post(new ImageSaver(imageReader.acquireNextImage()));
+            Image reader=imageReader.acquireNextImage();
+            ByteBuffer Buffer = reader.getPlanes()[0].getBuffer();
+            byte[] buff = new byte[Buffer.remaining()];
+            Buffer.get(buff);
+            BitmapFactory.Options ontain = new BitmapFactory.Options();
+            ontain.inSampleSize = 50;
+            Bitmap bm = BitmapFactory.decodeByteArray(buff, 0, buff.length, ontain);
+
+            mHandler.post(new ImageSaver(bm,buff));
+
+            final View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result, null);
+            classify_result_title=(TextView)view.findViewById(R.id.classify_result_title);
+            //classify_result_text=(TextView)view.findViewById(R.id.classify_result_text);
+            //classify_no_result=(TextView)view.findViewById(R.id.classify_no_result);
+            loadingview=(com.wang.avi.AVLoadingIndicatorView)view.findViewById(R.id.avi);
+
+            //弹出识别结果窗口
+            final PopupWindow resultWindow=resultWindow(view);
+            Log.d(TAG, "窗口已弹出");
+
+            //网络传输接收数据，并存入缓存文件
+            String base64Str=PictureClass.BitmapToString(bm);
+            diseaseinfo1.setPicture(base64Str);
+
+            //获取当前时间，转成String类型
+            SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date curDate=new Date(System.currentTimeMillis());
+            String sinfoTime=formatter.format(curDate);
+            diseaseinfo1.setInfoTime(sinfoTime);
+
+            //设置diseaseNo，diseaseKind，longitude,latitude，因为此时还未检测，所以全部是默认值
+            diseaseinfo1.setDiseaseNo("未检测");
+            diseaseinfo1.setDiseaseKind(new DiseaseKind());
+            double longitude=SetLocation.setLongitude();
+            diseaseinfo1.setLongitude(longitude);
+            double latitude=SetLocation.setLatitude();
+            diseaseinfo1.setLatitude(latitude);
+
+            //从用户信息的缓存文件中取出phonenumber
+            sp=getActivity().getSharedPreferences("userdata",Context.MODE_PRIVATE);
+            String phonenumber=sp.getString("phonenumber","检测不到登录信息");
+            diseaseinfo1.setPhonenumber(phonenumber);
+            //设置infoNo
+            String infoNo=phonenumber+sinfoTime;
+            diseaseinfo1.setInfoNo(infoNo);
+
+            //数据获取完毕，开始网络通信部分
+            String jsonStr=gson.toJson(diseaseinfo1);
+            RequestBody requestBody=RequestBody.create(JSON,jsonStr);
+            HttpUtil.sendHttpRequest("http://172.20.10.14:8080/Croprotector/TestPictureServlet",requestBody,new okhttp3.Callback(){
+                @Override
+                public void onResponse(Call call, Response response) throws IOException{
+                    //setSimulateClick(button, 160, 100);
+                    String responseData = response.body().string();
+                    res=GsonToBean.fromJsonObject(responseData,DiseaseKind.class);
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            final View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result_1, null);
+                            if(res.code==0){
+
+                                //接收返回的data
+                                DiseaseKind diseaseKind=res.data;
+                                diseaseinfo1.setDiseaseKind(diseaseKind);
+                                diseaseinfo1.setDiseaseNo(diseaseKind.getDiseaseNo());
+
+
+                                //将记录存储进缓存文件
+                                String jsonStr1=gson.toJson(diseaseinfo1);
+                                sp=getActivity().getSharedPreferences("infodata",Context.MODE_PRIVATE);
+                                editor=sp.edit();
+                                editor.putString(diseaseinfo1.getInfoNo(),jsonStr1);
+                                editor.putBoolean("isEmpty",false);                     //false证明文件不为空
+                                editor.commit();
+                                Log.d(TAG, "缓存文件已存储");
+
+                                new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Message message=new Message();
+                                        message.what=UPDATE_VIEW;
+                                        handler.sendMessage(message);
+                                    }
+                                }).start();
+
+                                //弹出识别结果窗口
+                                //classify_result_text.setText("检测结果为："+diseaseKind.getDiseaseName());
+                                //classify_result_title.setVisibility(View.VISIBLE);
+                                //classify_result_text.setVisibility(View.VISIBLE);
+                                //classify_no_result.setVisibility(View.INVISIBLE);
+                                //loadingview.setVisibility(View.INVISIBLE);
+                                resultWindow_1(view,diseaseKind.getDiseaseName());
+                                Log.d(TAG, "窗口已弹出");
+
+                            }
+                            else{
+                                //classify_result_title.setVisibility(View.VISIBLE);
+                                //classify_result_text.setVisibility(View.INVISIBLE);
+                                //classify_no_result.setVisibility(View.VISIBLE);
+                                //loadingview.setVisibility(View.INVISIBLE);
+                                //弹出识别结果窗口
+                                resultWindow_1(view,"健康");
+                                Log.d(TAG, "窗口已弹出");
+                            }
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailure(Call call,IOException e){
+                    //异常处理
+                }
+            });
+
+
+            handler=new Handler(){
+                public void handleMessage(Message msg){
+                    if(msg.what==UPDATE_VIEW){
+                        //更新View
+                        resultWindow.dismiss();
+                    }
+                }
+            };
+
+            /*new Handler().postDelayed(new Runnable(){
+                public void run()
+                {
+                    com.wang.avi.AVLoadingIndicatorView loading=(com.wang.avi.AVLoadingIndicatorView)view.findViewById(R.id.avi);
+                    loading.setVisibility(View.INVISIBLE);
+                    resultWindow.dismiss();
+                }
+            }, 800);*/
+
+
         }
     };
 
@@ -348,6 +522,15 @@ public class Shoot_fragment extends Fragment {
         mTextureView.setOnTouchListener(textTureOntuchListener);
         return v;
     }
+	
+	
+	@Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		
+    }
+	
+	
 
     @Override
     public void onDestroyView() {
@@ -379,17 +562,18 @@ public class Shoot_fragment extends Fragment {
     }
 
     private class ImageSaver implements Runnable {
-        Image reader;
+        Bitmap bm;
+        byte[] buff;
 
-        public ImageSaver(Image reader) {
-            this.reader = reader;
+        public ImageSaver(Bitmap bm,byte[] buff) {
+            this.bm = bm;
+            this.buff=buff;
         }
 
         @Override
         public void run() {
             Log.d(TAG, "正在保存图片");
-            File dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
-                    .getAbsoluteFile();
+            File dir= Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsoluteFile();
             if (!dir.exists()) {
                 dir.mkdirs();
             }
@@ -397,25 +581,20 @@ public class Shoot_fragment extends Fragment {
             FileOutputStream outputStream = null;
             try {
                 outputStream = new FileOutputStream(file);
-                ByteBuffer buffer = reader.getPlanes()[0].getBuffer();
-                //***************
-                //*****图片流****
-                byte[] buff = new byte[buffer.remaining()];
-                buffer.get(buff);
-                BitmapFactory.Options ontain = new BitmapFactory.Options();
-                ontain.inSampleSize = 50;
-                Bitmap bm = BitmapFactory.decodeByteArray(buff, 0, buff.length, ontain);
                 Message.obtain(mUIHandler, SETIMAGE, bm).sendToTarget();
                 outputStream.write(buff);
                 Log.d(TAG, "保存图片完成");
+                for(int i=0;i<=100;i++){
+
+                }
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-                if (reader != null) {
+                /*if (reader != null) {
                     reader.close();
-                }
+                }*/
                 if (outputStream != null) {
                     try {
                         outputStream.close();
@@ -448,4 +627,63 @@ public class Shoot_fragment extends Fragment {
             return false;
         }
     }
+
+
+    //识别后弹出结果窗口
+    private PopupWindow resultWindow(View view){
+        //View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result, null);
+        //1.构造一个PopupWindow，参数依次是加载的View，宽高
+        final PopupWindow popWindow = new PopupWindow(view,
+                400, ViewGroup.LayoutParams.WRAP_CONTENT);
+        //final PopupWindow popWindow = new PopupWindow(this.getActivity());
+        //popWindow.setAnimationStyle(R.anim.anim_pop);  //设置加载动画
+
+        //这些为了点击非PopupWindow区域，PopupWindow会消失的，如果没有下面的
+        //代码的话，你会发现，当你把PopupWindow显示出来了，无论你按多少次后退键
+        //PopupWindow并不会关闭，而且退不出程序，加上下述代码可以解决这个问题
+        popWindow.setOutsideTouchable(true);
+        popWindow.setTouchable(true);
+        popWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+                // 这里如果返回true的话，touch事件将被拦截
+                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
+            }
+        });
+        popWindow.setBackgroundDrawable(new ColorDrawable(0x11111111));    //要为popWindow设置一个背景才有效
+        //设置popupWindow显示的位置
+        popWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        return popWindow;
+    }
+
+    private PopupWindow resultWindow_1(View view,String text){
+        //View view = LayoutInflater.from(getActivity()).inflate(R.layout.classify_result, null);
+        //1.构造一个PopupWindow，参数依次是加载的View，宽高
+        final PopupWindow popWindow = new PopupWindow(view,
+                400, ViewGroup.LayoutParams.WRAP_CONTENT);
+        TextView result=(TextView)view.findViewById(R.id.classify_result_text);
+        result.setText(text);
+        //final PopupWindow popWindow = new PopupWindow(this.getActivity());
+        //popWindow.setAnimationStyle(R.anim.anim_pop);  //设置加载动画
+
+        //这些为了点击非PopupWindow区域，PopupWindow会消失的，如果没有下面的
+        //代码的话，你会发现，当你把PopupWindow显示出来了，无论你按多少次后退键
+        //PopupWindow并不会关闭，而且退不出程序，加上下述代码可以解决这个问题
+        popWindow.setOutsideTouchable(true);
+        popWindow.setTouchable(true);
+        popWindow.setTouchInterceptor(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return false;
+                // 这里如果返回true的话，touch事件将被拦截
+                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
+            }
+        });
+        popWindow.setBackgroundDrawable(new ColorDrawable(0x11111111));    //要为popWindow设置一个背景才有效
+        //设置popupWindow显示的位置
+        popWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        return popWindow;
+    }
+
 }

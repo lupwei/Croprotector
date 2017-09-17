@@ -21,7 +21,7 @@ public class GsonToBean {
     public static <T> CommonResponse<T> fromJsonObject(String jsonStr, Class<T> clazz)throws IOException {
         Reader reader=new StringReader(jsonStr);
         Type type= TypeBuilder.newInstance(CommonResponse.class)
-                .addTypeParam(clazz)
+                .addTypeParam(clazz)                     //设置CommonResponse的泛型值
                 .build();
         Gson gson=new Gson();
         return gson.fromJson(reader,type);
@@ -32,7 +32,7 @@ public class GsonToBean {
         Type type=TypeBuilder
                 .newInstance(CommonResponse.class)
                 .beginSubType(List.class)
-                .addTypeParam(clazz)
+                .addTypeParam(clazz)               //设置List的泛型值
                 .endSubType()
                 .build();
         Gson gson=new Gson();

@@ -1,32 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextureView
+    <!--<TextureView
         android:id="@+id/video_previewer_surface"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/linearLayout" />
+        android:layout_above="@+id/linearLayout" />-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextureView
+        android:id="@+id/video_previewer_surface"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <!--<LinearLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        tools:layout_editor_absoluteY="290dp"
+        tools:layout_editor_absoluteX="16dp">-->
+    <FrameLayout
+        android:id="@+id/control"
+        android:layout_width="0dp"
+        android:layout_height="112dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        app:layout_constraintBottom_toBottomOf="@+id/video_previewer_surface"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.497"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
         <Button
             android:id="@+id/btn_capture"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:layout_height="wrap_content"
-            android:text="Capture"
-            android:textSize="12sp"/>
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:layout_marginRight="0dp"
+            android:layout_gravity="right"
+            android:background="@drawable/shoot"/>
+
         <ToggleButton
             android:id="@+id/btn_record"
             android:layout_width="0dp"
@@ -37,7 +71,8 @@
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:textSize="12dp"
-            android:checked="false" />
+            android:checked="false"
+            android:visibility="invisible"/>
 
         <Button
             android:id="@+id/btn_shoot_photo_mode"
@@ -46,24 +81,39 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="Shoot Photo Mode"
-            android:textSize="12sp"/>
+            android:textSize="12sp"
+            android:visibility="invisible"/>
         <Button
             android:id="@+id/btn_record_video_mode"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Record Video Mode"
             android:layout_weight="1"
-            android:layout_gravity="center_vertical" />
-    </LinearLayout>
+            android:layout_gravity="center_vertical"
+            android:visibility="invisible" />
+    <!--</LinearLayout>-->
     <TextView
         android:id="@+id/timer"
         android:layout_width="150dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="23dp"
         android:gravity="center"
         android:textColor="#ffffff"
         android:layout_alignTop="@+id/video_previewer_surface"
-        android:layout_centerHorizontal="true" />
-</RelativeLayout>
+        android:layout_centerHorizontal="true"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:visibility="invisible"/>
+
+        <Button
+            android:id="@+id/btn_wayPoint"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+
+            android:background="@mipmap/ic_add_location_white_48dp"
+            tools:layout_editor_absoluteX="522dp"
+            tools:layout_editor_absoluteY="46dp" />
+    </FrameLayout>
+
+</android.support.constraint.ConstraintLayout>
