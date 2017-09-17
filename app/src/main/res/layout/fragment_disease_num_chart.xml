@@ -6,14 +6,11 @@
     android:orientation="vertical"
     tools:context="nova.croprotector.disease_num_chart_fragment">
 
-    <TextView
-        android:id="@+id/linechart_title"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/primary_dark"
-        android:textSize="25dp"
-        />
+        android:layout_height="1dp"
+        android:layout_margin="30dp"
+        android:background="@color/primary_dark"/>
 
     <lecho.lib.hellocharts.view.LineChartView
         android:id="@+id/disease_num_linechart"

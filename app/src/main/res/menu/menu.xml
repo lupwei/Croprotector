@@ -19,7 +19,7 @@
         <item
             android:id="@+id/map"
             android:icon="@mipmap/ic_add_location_black_48dp"
-            android:title="附近"/>
+            android:title="全国疫情"/>
         <item
             android:id="@+id/history"
             android:icon="@mipmap/ic_history_black_48dp"

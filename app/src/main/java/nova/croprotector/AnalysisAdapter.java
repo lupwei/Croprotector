@@ -15,6 +15,7 @@ import java.util.List;
 public class AnalysisAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> mList;
+    private String[] titles=new String[]{"日期统计","病虫害种类","病虫害比例"};
 
     public AnalysisAdapter(FragmentManager manager,List list){
         super(manager);
@@ -31,5 +32,9 @@ public class AnalysisAdapter extends FragmentPagerAdapter {
         return mList.size();
     }
 
+    @Override
+    public CharSequence getPageTitle(int position){
+        return titles[position];
+    }
 
 }

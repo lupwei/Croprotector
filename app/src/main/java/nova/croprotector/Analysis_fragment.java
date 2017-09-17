@@ -43,9 +43,6 @@ public class Analysis_fragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         mTabLayout=(TabLayout)view.findViewById(R.id.tabs);
-        mTabLayout.addTab(mTabLayout.newTab().setText("折线图"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("柱状图"));
-        mTabLayout.addTab(mTabLayout.newTab().setText("扇形图"));
 
         disease_num_chart_fragment Numchart=new disease_num_chart_fragment();
         disease_kind_chart_fragment Kindchart=new disease_kind_chart_fragment();
